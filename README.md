@@ -1,7 +1,7 @@
-4140 Human & Computer Interaction 
-Christopher Plaue 
-Spring 2018 
-Clemson University 
+###4140 Human & Computer Interaction 
+##Christopher Plaue 
+##Spring 2018 
+##Clemson University 
 #
 Alexander Stone
 Austin Youngblood
