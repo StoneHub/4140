@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import fragments.MainFragment;
 import fragments.GmapFragment;
+import fragments.MsgLstFragment;
 
 
 public class MainActivity extends AppCompatActivity
@@ -46,8 +47,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Set fragment on launch
         FragmentManager fm = getFragmentManager();
-        fm.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
+        fm.beginTransaction().replace(R.id.content_frame, new GmapFragment()).commit();
     }
 
     @Override
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity
 
         }
         else if (id == R.id.Msg_List_View) {
-
+            fm.beginTransaction().replace(R.id.content_frame, new MsgLstFragment()).commit();
         }
         else if (id == R.id.Map_View) {
             fm.beginTransaction().replace(R.id.content_frame, new GmapFragment()).commit();
