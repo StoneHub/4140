@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Fragment;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,9 +30,12 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.Random;
 
 /**
  * Created by monro on 3/20/2018.
@@ -72,6 +76,9 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Prompt the user for permission.
+        getLocationPermission();
+
         // Construct a GeoDataClient.
         mGeoDataClient = Places.getGeoDataClient(getActivity(), null);
 
@@ -80,7 +87,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
-
 
         MapFragment fragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         fragment.getMapAsync(this);
@@ -120,14 +126,23 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap map) {
         mMap = map;
 
-        // Prompt the user for permission.
-        getLocationPermission();
-        // Turn on the My Location layer and the related control on the map.
-        updateLocationUI();
+        mLastKnownLocation = new Location(LocationManager.GPS_PROVIDER);
+        mLastKnownLocation.setLatitude(mDefaultLocation.latitude);
+        mLastKnownLocation.setLongitude(mDefaultLocation.longitude);
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            getLocationPermission();
+        }
+
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
+        // Turn on the My Location layer and the related control on the map.
+        updateLocationUI();
 
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {return;}
+
+
         mMap.setMyLocationEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
@@ -136,26 +151,21 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
             public void onClick(View view) {
                 Snackbar.make(view, "Current Coordinates: " + mLastKnownLocation.getLatitude()+ " " + mLastKnownLocation.getLongitude(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                LatLng[] messageCoord = new LatLng[10];
+                Random rand = new Random();
+                for(int x=0;x<10;x++){
+                    int lat = rand.nextInt(35)+33;
+                    int lon = rand.nextInt(81)+83;
+                    messageCoord[x] = new LatLng(lat,-lon);
+                }
+
+               // for(int x=0; x< 10; x++) {
+                    mMap.addMarker(new MarkerOptions().position(messageCoord[0]).title("Sender of Msg"));
+               // }
             }
         });
-
     }
-//    private void moveCamera(LatLng markerLoc) {
-////        LatLng markerLoc=new LatLng(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
-//        final CameraPosition cameraPosition = new CameraPosition.Builder()
-//                .target(markerLoc)      // Sets the center of the map to Mountain View
-//                .zoom(13)                   // Sets the zoom
-//                .build();                   //
-//        mMap.addMarker(new MarkerOptions().position(new LatLng(mDefaultLocation.longitude, mDefaultLocation.latitude)).title("Marker"));
-//        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-//        mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
-////            @Override
-////            public boolean onMyLocationButtonClick() {
-////                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-////                return true;
-////            }
-////        });
-//    }
+
     /**
      * Gets the current location of the device, and positions the map's camera.
      */
@@ -171,16 +181,16 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
                     @Override
 
-                    public void onComplete(@NonNull Task<Location> task) {
-                        if (task.isSuccessful()) {
+                    public void onComplete(@NonNull Task<Location> locationResult) {
+                        if (locationResult.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
-                            mLastKnownLocation = task.getResult();
+//TODO mLastKnownLocation = locationResult.getResult();
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(mLastKnownLocation.getLatitude(),
+                                    new LatLng(mLastKnownLocation.getLatitude(),  //mLastKnownLocation is Null here //Try finding your location in the Google Maps app first, then launch the PostIT app
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
-                            Log.e(TAG, "Exception: %s", task.getException());
+                            Log.e(TAG, "Exception: %s", locationResult.getException());
                             mMap.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
