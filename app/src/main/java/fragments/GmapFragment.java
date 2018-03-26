@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Fragment;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -75,6 +76,9 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Prompt the user for permission.
+        getLocationPermission();
+
         // Construct a GeoDataClient.
         mGeoDataClient = Places.getGeoDataClient(getActivity(), null);
 
@@ -83,7 +87,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
-
 
         MapFragment fragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         fragment.getMapAsync(this);
@@ -123,14 +126,23 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap map) {
         mMap = map;
 
-        // Prompt the user for permission.
-        getLocationPermission();
-        // Turn on the My Location layer and the related control on the map.
-        updateLocationUI();
+        mLastKnownLocation = new Location(LocationManager.GPS_PROVIDER);
+        mLastKnownLocation.setLatitude(mDefaultLocation.latitude);
+        mLastKnownLocation.setLongitude(mDefaultLocation.longitude);
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            getLocationPermission();
+        }
+
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
+        // Turn on the My Location layer and the related control on the map.
+        updateLocationUI();
 
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {return;}
+
+
         mMap.setMyLocationEnabled(true);
 
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
@@ -169,16 +181,16 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
                     @Override
 
-                    public void onComplete(@NonNull Task<Location> task) {
-                        if (task.isSuccessful()) {
+                    public void onComplete(@NonNull Task<Location> locationResult) {
+                        if (locationResult.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
-                            mLastKnownLocation = task.getResult();
+//TODO mLastKnownLocation = locationResult.getResult();
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(mLastKnownLocation.getLatitude(),
+                                    new LatLng(mLastKnownLocation.getLatitude(),  //mLastKnownLocation is Null here //Try finding your location in the Google Maps app first, then launch the PostIT app
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
-                            Log.e(TAG, "Exception: %s", task.getException());
+                            Log.e(TAG, "Exception: %s", locationResult.getException());
                             mMap.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
