@@ -151,10 +151,8 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View view) {
 //                Snackbar.make(view, "Current Coordinates: " + mLastKnownLocation.getLatitude()+ " " + mLastKnownLocation.getLongitude(), Snackbar.LENGTH_LONG).setAction("Action", null).show();
-              
-//                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                ft.replace(R.id.content_frame, new ComposeMsgFragment(), "NewFragmentTag");
-//                ft.commit();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, new ComposeMsgFragment()).commit();
             }
         });
     }

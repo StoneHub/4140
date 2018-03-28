@@ -1,5 +1,6 @@
 package fragments;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -15,10 +16,10 @@ import com.google.android.gms.maps.MapFragment;
  * Created by monro on 3/27/2018.
  */
 
-public class ComposeMsgFragment {
+public class ComposeMsgFragment extends Fragment {
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_msglst, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_compose, container, false);
 
         return rootView;
     }
