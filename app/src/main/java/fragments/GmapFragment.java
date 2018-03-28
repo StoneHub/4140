@@ -2,6 +2,8 @@ package fragments;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -34,7 +36,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
 import java.util.Random;
 
 /**
@@ -149,19 +150,11 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Current Coordinates: " + mLastKnownLocation.getLatitude()+ " " + mLastKnownLocation.getLongitude(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                LatLng[] messageCoord = new LatLng[10];
-                Random rand = new Random();
-                for(int x=0;x<10;x++){
-                    int lat = rand.nextInt(35)+33;
-                    int lon = rand.nextInt(81)+83;
-                    messageCoord[x] = new LatLng(lat,-lon);
-                }
-
-               // for(int x=0; x< 10; x++) {
-                    mMap.addMarker(new MarkerOptions().position(messageCoord[0]).title("Sender of Msg"));
-               // }
+//                Snackbar.make(view, "Current Coordinates: " + mLastKnownLocation.getLatitude()+ " " + mLastKnownLocation.getLongitude(), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+              
+//                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+//                ft.replace(R.id.content_frame, new ComposeMsgFragment(), "NewFragmentTag");
+//                ft.commit();
             }
         });
     }
