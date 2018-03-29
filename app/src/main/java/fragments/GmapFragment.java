@@ -65,6 +65,10 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
+    //Place marker on touch
+    MarkerOptions marker = new MarkerOptions();
+
+
 
     @Nullable
     @Override
@@ -92,7 +96,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         MapFragment fragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         fragment.getMapAsync(this);
     }
-
 
     /**
      * Saves the state of the map when the activity is paused.
@@ -151,10 +154,28 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View view) {
 //                Snackbar.make(view, "Current Coordinates: " + mLastKnownLocation.getLatitude()+ " " + mLastKnownLocation.getLongitude(), Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, new ComposeMsgFragment()).commit();
+//                FragmentTransaction ft = getFragmentManager().beginTransaction();
+//                ft.replace(R.id.content_frame, new ComposeMsgFragment()).commit();
+                Fragment fragment = new ComposeMsgFragment();
+                replaceFragment(fragment);
+
             }
         });
+
+        //Place marker
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                marker.position(latLng);
+                marker.title(marker.getPosition().latitude + " : " + marker.getPosition().latitude);
+                marker.draggable(true);
+                //clear previously touch position
+                mMap.clear();
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                mMap.addMarker(marker);
+            }
+        });
+
     }
 
     /**
@@ -175,7 +196,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                     public void onComplete(@NonNull Task<Location> locationResult) {
                         if (locationResult.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
-//TODO mLastKnownLocation = locationResult.getResult();
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),  //mLastKnownLocation is Null here //Try finding your location in the Google Maps app first, then launch the PostIT app
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
@@ -277,5 +297,13 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
         }
+    }
+
+    public void replaceFragment(Fragment someFragment) {
+        android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.content_frame, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
