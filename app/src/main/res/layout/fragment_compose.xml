@@ -23,11 +23,12 @@
         android:text="Current Note location" />
 
     <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/whoNo"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/button2"
         android:layout_marginTop="15dp"
+        android:popupBackground="@color/common_google_signin_btn_text_light_focused"
         android:text="Who can pick up your Note?" />
 </RelativeLayout>
