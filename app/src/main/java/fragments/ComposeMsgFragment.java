@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cpsc41400.a4140app.R;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.Places;
-import com.google.android.gms.maps.MapFragment;
+
 
 /**
  * Created by monro on 3/27/2018.
@@ -27,6 +25,10 @@ public class ComposeMsgFragment extends Fragment {
     }
 
     public void noteLocationChange() {
+
+    }
+
+    public void getContacts() {
 
     }
 
