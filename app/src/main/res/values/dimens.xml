@@ -12,4 +12,6 @@
     <dimen name="detailed_text_size">16dp</dimen>
     <dimen name="previewMessageSize">15sp</dimen>
     <dimen name="time_margin">8dp</dimen>
+    <dimen name="nav_header_height">150dp</dimen>
+    <dimen name="nav_header_vertical_spacing">10dp</dimen>
 </resources>
