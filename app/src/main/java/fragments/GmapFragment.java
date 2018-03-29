@@ -68,6 +68,10 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     //Place marker on touch
     MarkerOptions marker = new MarkerOptions();
 
+    //pass arguments to ComposeFragment
+    private static final String argKey = "argKey";
+
+
 
 
     @Nullable
@@ -129,7 +133,10 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
+        //disable Map Toolbar
+        mMap.getUiSettings().setMapToolbarEnabled(false);
 
+        //get location
         mLastKnownLocation = new Location(LocationManager.GPS_PROVIDER);
         mLastKnownLocation.setLatitude(mDefaultLocation.latitude);
         mLastKnownLocation.setLongitude(mDefaultLocation.longitude);
@@ -145,19 +152,16 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         // Turn on the My Location layer and the related control on the map.
         updateLocationUI();
 
-
-
+        //enable find current location button on map
         mMap.setMyLocationEnabled(true);
+
 
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Current Coordinates: " + mLastKnownLocation.getLatitude()+ " " + mLastKnownLocation.getLongitude(), Snackbar.LENGTH_LONG).setAction("Action", null).show();
-//                FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                ft.replace(R.id.content_frame, new ComposeMsgFragment()).commit();
-                Fragment fragment = new ComposeMsgFragment();
-                replaceFragment(fragment);
+                //Bundle up the current latlng, and spin up a new Fragment with the passed arguments 
+                FragmentArgs();
 
             }
         });
@@ -168,11 +172,10 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
             public void onMapClick(LatLng latLng) {
                 marker.position(latLng);
                 marker.title(marker.getPosition().latitude + " : " + marker.getPosition().latitude);
-                marker.draggable(true);
                 //clear previously touch position
                 mMap.clear();
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 mMap.addMarker(marker);
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
             }
         });
 
@@ -299,9 +302,18 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    public void FragmentArgs(){
+        double[] loc = {marker.getPosition().longitude, marker.getPosition().latitude};
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(argKey,loc);
+
+        Fragment fragment = new ComposeMsgFragment();
+        fragment.setArguments(bundle);
+        replaceFragment(fragment);
+    }
+
     public void replaceFragment(Fragment someFragment) {
         android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
         transaction.replace(R.id.content_frame, someFragment);
         transaction.addToBackStack(null);
         transaction.commit();

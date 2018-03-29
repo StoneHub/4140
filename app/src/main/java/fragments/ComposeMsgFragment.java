@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.cpsc41400.a4140app.R;
+import com.google.android.gms.maps.model.LatLng;
 
 
 /**
@@ -21,29 +22,28 @@ import com.cpsc41400.a4140app.R;
 public class ComposeMsgFragment extends Fragment {
 
     private AdapterView.OnItemClickListener onContactClickListener;
+    private static final String argKey = "argKey";
+    private Button updateLocBtn;
 
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_compose, container, false);
 
-       onContactClickListener = new AdapterView.OnItemClickListener(){
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Toast.makeText(getActivity(),
-                            "Clicked item from auto completion list "
-                                    + adapterView.getItemAtPosition(i)
-                            , Toast.LENGTH_SHORT).show();
-                }
-            };
+        double[] loc = getArguments().getDoubleArray(argKey);
+        final String lat = Double.toString(loc[1]);
+        final String lng = Double.toString(loc[0]);
 
-       Button b = (Button) rootView.findViewById(R.id.changeLocBtn);
-    b.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Fragment fragment =  new GmapFragment();
+
+        updateLocBtn = rootView.findViewById(R.id.changeLocBtn);
+        String latlng = lat + " : " +lng;
+        updateLocBtn.setText(latlng);
+        updateLocBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment =  new GmapFragment();
                 replaceFragment(fragment);
-        }
-    });
+            }
+        });
 
         return rootView;
     }
@@ -54,6 +54,10 @@ public class ComposeMsgFragment extends Fragment {
         AutoCompleteTextView actv = getView().findViewById(R.id.whoNo);
         actv.setOnItemClickListener(onContactClickListener);
 
+
+
+
+
     }
 
     public void replaceFragment(Fragment someFragment) {
@@ -62,6 +66,8 @@ public class ComposeMsgFragment extends Fragment {
     transaction.addToBackStack(null);
     transaction.commit();
 }
+
+
 
 
 
