@@ -10,12 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de2af650-c082-4a02-a9b3-a307f07ac580" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/fragments/ComposeMsgFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/fragments/ComposeMsgFragment.java" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/fragments/GmapFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/fragments/GmapFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_compose.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_compose.xml" />
     </list>
     <ignored path="C:\AStudio\4140\.idea\shelf/" />
     <ignored path="C:\Users\young5\Desktop\cpsc4140\Project\4140\.idea\shelf/" />
@@ -60,14 +56,14 @@
       <file leaf-file-name="GmapFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/fragments/GmapFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="162" column="101" lean-forward="false" selection-start-line="162" selection-start-column="101" selection-end-line="162" selection-end-column="101" />
+            <state relative-caret-position="170">
+              <caret line="305" column="93" lean-forward="false" selection-start-line="305" selection-start-column="93" selection-end-line="305" selection-end-column="93" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6104#6358#0" expanded="true" />
-                <element signature="e#6357#6358#0" expanded="true" />
-                <element signature="e#6420#6891#0" expanded="true" />
-                <element signature="e#6890#6891#0" expanded="true" />
+                <element signature="e#5965#6219#0" expanded="true" />
+                <element signature="e#6218#6219#0" expanded="true" />
+                <element signature="e#6281#6834#0" expanded="true" />
+                <element signature="e#6833#6834#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -89,8 +85,8 @@
       <file leaf-file-name="ComposeMsgFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/fragments/ComposeMsgFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
+            <state relative-caret-position="849">
+              <caret line="65" column="31" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1252#1468#0" expanded="true" />
@@ -2297,7 +2293,7 @@
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../s18-electric-car-feedback/app" />
     <property name="SearchEverywhereHistoryKey" value="MsgLst&#9;PSI&#9;JAVA://com.cpsc41400.a4140app.R.layout#fragment_msglst&#10;sdk mana&#9;ACTION&#9;Android.RunAndroidSdkManager" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522340670556" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522343245641" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
@@ -2769,7 +2765,14 @@
       <option name="project" value="LOCAL" />
       <updated>1522336103499</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Place marker on touch">
+      <created>1522340780505</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1522340780505</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2787,7 +2790,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932693" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3317498" sideWeight="0.49675852" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35573772" sideWeight="0.4965398" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35573772" sideWeight="0.4965398" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -2798,7 +2801,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39910814" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39836067" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -2894,7 +2897,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -3208,18 +3211,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/fragments/ComposeMsgFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1252#1468#0" expanded="true" />
-            <element signature="e#1467#1468#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_compose.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -3231,16 +3222,28 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/fragments/GmapFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/fragments/ComposeMsgFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="162" column="101" lean-forward="false" selection-start-line="162" selection-start-column="101" selection-end-line="162" selection-end-column="101" />
+        <state relative-caret-position="849">
+          <caret line="65" column="31" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6104#6358#0" expanded="true" />
-            <element signature="e#6357#6358#0" expanded="true" />
-            <element signature="e#6420#6891#0" expanded="true" />
-            <element signature="e#6890#6891#0" expanded="true" />
+            <element signature="e#1252#1468#0" expanded="true" />
+            <element signature="e#1467#1468#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/fragments/GmapFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="305" column="93" lean-forward="false" selection-start-line="305" selection-start-column="93" selection-end-line="305" selection-end-column="93" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5965#6219#0" expanded="true" />
+            <element signature="e#6218#6219#0" expanded="true" />
+            <element signature="e#6281#6834#0" expanded="true" />
+            <element signature="e#6833#6834#0" expanded="true" />
           </folding>
         </state>
       </provider>
