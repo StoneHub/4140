@@ -33,8 +33,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import java.sql.ResultSet;
-
 /**
  * Created by monro on 3/20/2018.
  */
@@ -170,13 +168,16 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 markerExist = true;
                 marker = new MarkerOptions();
                 marker.position(latLng);
-                marker.title(marker.getPosition().latitude + " : " + marker.getPosition().latitude);
+//                marker.title(marker.getPosition().latitude + " : " + marker.getPosition().latitude);
+                marker.title("Note is ready to be left here");
                 //clear previously touch position
                 mMap.clear();
                 mMap.addMarker(marker);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
             }
         });
+
+
     }
 
     /**
@@ -193,7 +194,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
 
                     @Override
-
                     public void onComplete(@NonNull Task<Location> locationResult) {
                         if (locationResult.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.

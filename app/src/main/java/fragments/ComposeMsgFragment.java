@@ -47,8 +47,8 @@ public class ComposeMsgFragment extends Fragment {
 
 
         updateLocBtn = rootView.findViewById(R.id.changeLocBtn);
-        String latlng = lat + " : " +lng;
-        updateLocBtn.setText(latlng);
+        String btnTxt = "Change Note location";
+        updateLocBtn.setText(btnTxt);
         updateLocBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +71,8 @@ public class ComposeMsgFragment extends Fragment {
             @Override
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
+                googleMap.getUiSettings().setMapToolbarEnabled(false);
+
                 // For dropping a marker at a point on the Map
                 googleMap.addMarker(new MarkerOptions().position(latLng).title("Marker Title").snippet("Marker Description"));
                 // For zooming automatically to the location of the marker
