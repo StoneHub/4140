@@ -7,9 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.*;
 import android.widget.AutoCompleteTextView;
-import android.widget.MultiAutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.cpsc41400.a4140app.R;

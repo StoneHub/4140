@@ -11,10 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="de2af650-c082-4a02-a9b3-a307f07ac580" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/fragments/ComposeMsgFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/fragments/ComposeMsgFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/fragments/GmapFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/fragments/GmapFragment.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_compose.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_compose.xml" />
     </list>
     <ignored path="C:\AStudio\4140\.idea\shelf/" />
     <ignored path="C:\Users\young5\Desktop\cpsc4140\Project\4140\.idea\shelf/" />
@@ -131,8 +128,8 @@
       <file leaf-file-name="ComposeMsgFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/fragments/ComposeMsgFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
-              <caret line="48" column="24" lean-forward="true" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
+            <state relative-caret-position="692">
+              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -2341,7 +2338,7 @@
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../s18-electric-car-feedback/app" />
     <property name="SearchEverywhereHistoryKey" value="MsgLst&#9;PSI&#9;JAVA://com.cpsc41400.a4140app.R.layout#fragment_msglst&#10;sdk mana&#9;ACTION&#9;Android.RunAndroidSdkManager" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522328226648" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1522328984348" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
@@ -2685,7 +2682,14 @@
       <option name="project" value="LOCAL" />
       <updated>1522283655750</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Updated fragment transitions to use replaceFragment()">
+      <created>1522328343882</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1522328343883</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2740,7 +2744,8 @@
     <MESSAGE value="Working on replacing the maps fragment with the composemsgfragment on button press in GmapFragment." />
     <MESSAGE value="OK new Fragment for composing a message launches when you press the button!!!" />
     <MESSAGE value="Merged with welp" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merged with welp" />
+    <MESSAGE value="Updated fragment transitions to use replaceFragment()" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated fragment transitions to use replaceFragment()" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3080,8 +3085,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/fragments/ComposeMsgFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="48" column="24" lean-forward="true" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
+        <state relative-caret-position="692">
+          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
