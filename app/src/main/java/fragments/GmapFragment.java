@@ -65,6 +65,10 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
+    //Place marker on touch
+    MarkerOptions marker = new MarkerOptions();
+
+
 
     @Nullable
     @Override
@@ -92,7 +96,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         MapFragment fragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         fragment.getMapAsync(this);
     }
-
 
     /**
      * Saves the state of the map when the activity is paused.
@@ -158,6 +161,21 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
             }
         });
+
+        //Place marker
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                marker.position(latLng);
+                marker.title(marker.getPosition().latitude + " : " + marker.getPosition().latitude);
+                marker.draggable(true);
+                //clear previously touch position
+                mMap.clear();
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                mMap.addMarker(marker);
+            }
+        });
+
     }
 
     /**
@@ -280,7 +298,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
             Log.e("Exception: %s", e.getMessage());
         }
     }
-
 
     public void replaceFragment(Fragment someFragment) {
         android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();

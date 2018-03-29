@@ -58,7 +58,6 @@ public class ComposeMsgFragment extends Fragment {
 
     public void replaceFragment(Fragment someFragment) {
    android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
     transaction.replace(R.id.content_frame, someFragment);
     transaction.addToBackStack(null);
     transaction.commit();
