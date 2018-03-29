@@ -151,8 +151,11 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View view) {
 //                Snackbar.make(view, "Current Coordinates: " + mLastKnownLocation.getLatitude()+ " " + mLastKnownLocation.getLongitude(), Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, new ComposeMsgFragment()).commit();
+//                FragmentTransaction ft = getFragmentManager().beginTransaction();
+//                ft.replace(R.id.content_frame, new ComposeMsgFragment()).commit();
+                Fragment fragment = new ComposeMsgFragment();
+                replaceFragment(fragment);
+
             }
         });
     }
@@ -175,7 +178,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                     public void onComplete(@NonNull Task<Location> locationResult) {
                         if (locationResult.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
-//TODO mLastKnownLocation = locationResult.getResult();
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),  //mLastKnownLocation is Null here //Try finding your location in the Google Maps app first, then launch the PostIT app
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
@@ -277,5 +279,14 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
         }
+    }
+
+
+    public void replaceFragment(Fragment someFragment) {
+        android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.content_frame, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
