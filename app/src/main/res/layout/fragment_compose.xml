@@ -8,26 +8,46 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="26dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:selectAllOnFocus="true"
         android:text="Whats the Note?" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/changeLocBtn"
         android:layout_width="349dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="86dp"
-        android:text="Current Note location" />
+        android:layout_marginTop="86dp" />
 
     <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView2"
-        android:layout_width="wrap_content"
+        android:id="@+id/whoNo"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/button2"
+        android:layout_alignStart="@+id/changeLocBtn"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="15dp"
+        android:isScrollContainer="false"
+        android:phoneNumber="false"
+        android:popupBackground="@color/common_google_signin_btn_text_light_focused"
         android:text="Who can pick up your Note?" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/whoNo"
+        android:layout_below="@+id/changeLocBtn"
+        android:text="Press to change Note location" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="329dp"
+        android:layout_height="251dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/whoNo"
+        android:layout_marginTop="174dp" />
 </RelativeLayout>
