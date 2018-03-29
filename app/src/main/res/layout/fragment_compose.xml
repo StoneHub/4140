@@ -42,4 +42,12 @@
         android:layout_alignStart="@+id/whoNo"
         android:layout_below="@+id/changeLocBtn"
         android:text="Press to change Note location" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="329dp"
+        android:layout_height="251dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/whoNo"
+        android:layout_marginTop="174dp" />
 </RelativeLayout>
