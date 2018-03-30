@@ -9,10 +9,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,13 +28,18 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.sql.ResultSet;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by monro on 3/20/2018.
@@ -65,26 +70,42 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
     //Place marker on touch
     MarkerOptions marker = null;
+    private Marker mailMarker;
+    Random r = new Random();
+    LatLng[] messageCoord = new LatLng[10];
+    // double lat = .0030*r.nextDouble()+34.6804;
+    //double lon = .0030*r.nextDouble()+82.8344;
+    //MarkerOptions mailMarker = null;
 
     //pass arguments to ComposeFragment
     private static final String argKey = "argKey";
     private boolean markerExist = false;
+    private boolean mailExist = false;
     private static View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+           if (view != null) {
 
-        if (view != null) {
             ViewGroup parent = (ViewGroup) view.getParent();
+
             if (parent != null)
+
                 parent.removeView(view);
+
         }
+
         try {
+
             view = inflater.inflate(R.layout.fragment_gmap, container, false);
-        } catch (InflateException e) {
+
+        } catch (android.view.InflateException e) {
+
         /* map is already there, just return view as it is */
+
         }
+
         return view;
     }
 
@@ -177,18 +198,79 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
         //Place marker
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            public double randomLat(double lat){
+
+
+                return(lat);
+            }
+
             @Override
             public void onMapClick(LatLng latLng) {
                 markerExist = true;
+                mailExist = true;
                 marker = new MarkerOptions();
                 marker.position(latLng);
-                marker.title(marker.getPosition().latitude + " : " + marker.getPosition().latitude);
+                marker.title(marker.getPosition().longitude + " : " + marker.getPosition().latitude);
                 //clear previously touch position
                 mMap.clear();
                 mMap.addMarker(marker);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                //LatLng[] messageCoord = new LatLng[10];
+
+                /*for(int x=0;x<10;x++){
+                    //if(mailExist) {
+                        double lat = .0030 * r.nextDouble() + 34.6804;
+                        double lon = .0030 * r.nextDouble() + 82.8344;
+                        messageCoord[x] = new LatLng(lat, -lon);
+                    //}
+                    //else {
+                       // messageCoord[x] = new LatLng(lat, -lon);
+                    //}
+                    //}
+                   // double lat = .0030*r.nextDouble()+34.6804;
+                    //double lon = .0030*r.nextDouble()+82.8344;
+                   // messageCoord[x] = new LatLng(lat,-lon);
+                }*/
+
+                for(int x=0; x< 10; x++) {
+                    mailMarker = mMap.addMarker(new MarkerOptions()
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                            .position(messageCoord[x]).title("Sender of Msg"));
+                }
             }
         });
+
+        for(int x=0;x<10;x++){
+            //if(mailExist) {
+            double lat = .0200 * r.nextDouble() + 34.6634;
+            double lon = .0200 * r.nextDouble() + 82.8174;
+            messageCoord[x] = new LatLng(lat, -lon);
+            //}
+            //else {
+            // messageCoord[x] = new LatLng(lat, -lon);
+            //}
+            //}
+            // double lat = .0030*r.nextDouble()+34.6804;
+            //double lon = .0030*r.nextDouble()+82.8344;
+            // messageCoord[x] = new LatLng(lat,-lon);
+        }
+
+
+        //  LatLng[] messageCoord = new LatLng[10];
+        //Random r = new Random();
+        //for(int x=0;x<10;x++){
+        //double lat = .0030*r.nextDouble()+34.6804;
+        // double lon = .0030*r.nextDouble()+82.8344;
+        //   messageCoord[x] = new LatLng(lat,-lon);
+        // }
+
+        for(int x=0; x< 10; x++) {
+            mailMarker = mMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                    .position(messageCoord[x]).title("Sender of Msg"));
+        }
     }
 
     /**
@@ -205,7 +287,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
 
                     @Override
-
                     public void onComplete(@NonNull Task<Location> locationResult) {
                         if (locationResult.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
