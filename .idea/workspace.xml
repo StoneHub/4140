@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="de2af650-c082-4a02-a9b3-a307f07ac580" name="Default" comment="">
+<<<<<<< Updated upstream
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_action_sent_mail.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/cpsc41400/a4140app/MyAdapter.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rounded_background.xml" />
@@ -21,6 +22,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/fragments/MsgLstFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/fragments/MsgLstFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+>>>>>>> Stashed changes
     </list>
     <ignored path="C:\AStudio\4140\.idea\shelf/" />
     <ignored path="C:\Users\young5\Desktop\cpsc4140\Project\4140\.idea\shelf/" />
@@ -3808,7 +3812,25 @@
       <option name="project" value="LOCAL" />
       <updated>1522367923013</updated>
     </task>
+<<<<<<< Updated upstream
     <option name="localTasksCounter" value="12" />
+=======
+    <task id="LOCAL-00012" summary="UGH">
+      <created>1522368144256</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1522368144256</updated>
+    </task>
+    <task id="LOCAL-00013" summary="loading msgs">
+      <created>1522370993158</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1522370993158</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+>>>>>>> Stashed changes
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3936,7 +3958,13 @@
     <MESSAGE value="Fixed" />
     <MESSAGE value="Fixed a tab bar thing I messed up so now its good" />
     <MESSAGE value="Fixing message view" />
+<<<<<<< Updated upstream
     <option name="LAST_COMMIT_MESSAGE" value="Fixing message view" />
+=======
+    <MESSAGE value="UGH" />
+    <MESSAGE value="loading msgs" />
+    <option name="LAST_COMMIT_MESSAGE" value="loading msgs" />
+>>>>>>> Stashed changes
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
