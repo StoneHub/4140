@@ -12,6 +12,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,12 +69,23 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     //pass arguments to ComposeFragment
     private static final String argKey = "argKey";
     private boolean markerExist = false;
-
+    private static View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_gmap, container, false);
+
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null)
+                parent.removeView(view);
+        }
+        try {
+            view = inflater.inflate(R.layout.fragment_gmap, container, false);
+        } catch (InflateException e) {
+        /* map is already there, just return view as it is */
+        }
+        return view;
     }
 
 
