@@ -211,7 +211,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 mailExist = true;
                 marker = new MarkerOptions();
                 marker.position(latLng);
-                marker.title(marker.getPosition().longitude + " : " + marker.getPosition().latitude);
+                marker.title("PostIT here!");
                 //clear previously touch position
                 mMap.clear();
                 mMap.addMarker(marker);

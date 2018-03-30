@@ -47,7 +47,7 @@ public class ComposeMsgFragment extends Fragment {
 
 
         updateLocBtn = rootView.findViewById(R.id.changeLocBtn);
-        String latlng = lat + " : " +lng;
+        String latlng = "Press to change Note location";
         updateLocBtn.setText(latlng);
         updateLocBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,8 +71,10 @@ public class ComposeMsgFragment extends Fragment {
             @Override
             public void onMapReady(GoogleMap mMap) {
                 googleMap = mMap;
+                googleMap.getUiSettings().setMapToolbarEnabled(false);
+
                 // For dropping a marker at a point on the Map
-                googleMap.addMarker(new MarkerOptions().position(latLng).title("Marker Title").snippet("Marker Description"));
+                googleMap.addMarker(new MarkerOptions().position(latLng).title("PostIT here!").snippet(lat + lng));
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(15).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition),3000,null);
@@ -86,10 +88,6 @@ public class ComposeMsgFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         AutoCompleteTextView actv = getView().findViewById(R.id.whoNo);
         actv.setOnItemClickListener(onContactClickListener);
-
-
-
-
 
     }
 
