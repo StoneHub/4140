@@ -9,4 +9,10 @@
     <string name="team_name">Team Sweets</string>
     <string name="title">SENDER</string>
     <string name="content_small">This is the preview of the full SMS. To read more click on the SMS.</string>
+    <string name="please_write_message">Please write some message</string>
+    <string name="cant_send">Can\'t send sms to this contact.</string>
+    <string name="sms_delivered">SMS delivered</string>
+    <string name="sms_not_delivered">SMS not delivered</string>
+    <string name="write_message">Write Message..</string>
+
 </resources>
