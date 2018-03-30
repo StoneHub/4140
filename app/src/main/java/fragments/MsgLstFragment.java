@@ -25,7 +25,7 @@ public class MsgLstFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_sms_detailed_view, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_msglst, container, false);
 
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.my_activity);
@@ -33,15 +33,15 @@ public class MsgLstFragment extends Fragment {
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
+//        mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+      //  mLayoutManager = new LinearLayoutManager(getActivity());
+     //   mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        //mAdapter = new MyAdapter(myDataset);
-        mRecyclerView.setAdapter(mAdapter);
+       // mAdapter = new MyAdapter();
+//        mRecyclerView.setAdapter(mAdapter);
 
         return rootView;
     }
