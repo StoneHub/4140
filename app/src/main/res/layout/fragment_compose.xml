@@ -49,5 +49,5 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/editText2"
         android:layout_toEndOf="@+id/editText2"
-        android:text="Button" />
+        android:text="Post - IT" />
 </RelativeLayout>
