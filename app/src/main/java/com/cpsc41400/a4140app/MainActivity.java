@@ -1,10 +1,14 @@
 package com.cpsc41400.a4140app;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NavUtils;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -54,11 +58,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        // This will get you total fragment in the backStack
+        int count = getFragmentManager().getBackStackEntryCount();
+        switch(count){
+            case 0:
+                super.onBackPressed();
+                break;
+            default:
+                getFragmentManager().popBackStack();
+                break;
         }
     }
 
@@ -80,7 +88,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -92,10 +99,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        }
-        else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_gallery) {
 
         }
         else if (id == R.id.Msg_List_View) {

@@ -2,8 +2,6 @@ package fragments;
 
 import android.Manifest;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -30,13 +28,18 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import java.sql.ResultSet;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by monro on 3/20/2018.
@@ -65,11 +68,45 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
+    //Place marker on touch
+    MarkerOptions marker = null;
+    private Marker mailMarker;
+    Random r = new Random();
+    LatLng[] messageCoord = new LatLng[10];
+    // double lat = .0030*r.nextDouble()+34.6804;
+    //double lon = .0030*r.nextDouble()+82.8344;
+    //MarkerOptions mailMarker = null;
+
+    //pass arguments to ComposeFragment
+    private static final String argKey = "argKey";
+    private boolean markerExist = false;
+    private boolean mailExist = false;
+    private static View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_gmap, container, false);
+           if (view != null) {
+
+            ViewGroup parent = (ViewGroup) view.getParent();
+
+            if (parent != null)
+
+                parent.removeView(view);
+
+        }
+
+        try {
+
+            view = inflater.inflate(R.layout.fragment_gmap, container, false);
+
+        } catch (android.view.InflateException e) {
+
+        /* map is already there, just return view as it is */
+
+        }
+
+        return view;
     }
 
 
@@ -92,7 +129,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         MapFragment fragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         fragment.getMapAsync(this);
     }
-
 
     /**
      * Saves the state of the map when the activity is paused.
@@ -124,9 +160,12 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
      * This callback is triggered when the map is ready to be used.
      */
     @Override
-    public void onMapReady(GoogleMap map) {
+    public void onMapReady(final GoogleMap map) {
         mMap = map;
+        //disable Map Toolbar
+        mMap.getUiSettings().setMapToolbarEnabled(false);
 
+        //get location
         mLastKnownLocation = new Location(LocationManager.GPS_PROVIDER);
         mLastKnownLocation.setLatitude(mDefaultLocation.latitude);
         mLastKnownLocation.setLongitude(mDefaultLocation.longitude);
@@ -142,19 +181,96 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         // Turn on the My Location layer and the related control on the map.
         updateLocationUI();
 
-
-
+        //enable find current location button on map
         mMap.setMyLocationEnabled(true);
+
 
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Current Coordinates: " + mLastKnownLocation.getLatitude()+ " " + mLastKnownLocation.getLongitude(), Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.content_frame, new ComposeMsgFragment()).commit();
+
+                //Bundle up the current latlng, and spin up a new Fragment with the passed arguments
+                FragmentArgs();
+
             }
         });
+
+        //Place marker
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            public double randomLat(double lat){
+
+
+                return(lat);
+            }
+
+            @Override
+            public void onMapClick(LatLng latLng) {
+                markerExist = true;
+                mailExist = true;
+                marker = new MarkerOptions();
+                marker.position(latLng);
+                marker.title("PostIT here!");
+                //clear previously touch position
+                mMap.clear();
+                mMap.addMarker(marker);
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                //LatLng[] messageCoord = new LatLng[10];
+
+                /*for(int x=0;x<10;x++){
+                    //if(mailExist) {
+                        double lat = .0030 * r.nextDouble() + 34.6804;
+                        double lon = .0030 * r.nextDouble() + 82.8344;
+                        messageCoord[x] = new LatLng(lat, -lon);
+                    //}
+                    //else {
+                       // messageCoord[x] = new LatLng(lat, -lon);
+                    //}
+                    //}
+                   // double lat = .0030*r.nextDouble()+34.6804;
+                    //double lon = .0030*r.nextDouble()+82.8344;
+                   // messageCoord[x] = new LatLng(lat,-lon);
+                }*/
+
+                for(int x=0; x< 10; x++) {
+                    mailMarker = mMap.addMarker(new MarkerOptions()
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                            .position(messageCoord[x]).title("Sender of Msg"));
+                }
+            }
+        });
+
+        for(int x=0;x<10;x++){
+            //if(mailExist) {
+            double lat = .0200 * r.nextDouble() + 34.6634;
+            double lon = .0200 * r.nextDouble() + 82.8174;
+            messageCoord[x] = new LatLng(lat, -lon);
+            //}
+            //else {
+            // messageCoord[x] = new LatLng(lat, -lon);
+            //}
+            //}
+            // double lat = .0030*r.nextDouble()+34.6804;
+            //double lon = .0030*r.nextDouble()+82.8344;
+            // messageCoord[x] = new LatLng(lat,-lon);
+        }
+
+
+        //  LatLng[] messageCoord = new LatLng[10];
+        //Random r = new Random();
+        //for(int x=0;x<10;x++){
+        //double lat = .0030*r.nextDouble()+34.6804;
+        // double lon = .0030*r.nextDouble()+82.8344;
+        //   messageCoord[x] = new LatLng(lat,-lon);
+        // }
+
+        for(int x=0; x< 10; x++) {
+            mailMarker = mMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                    .position(messageCoord[x]).title("Sender of Msg"));
+        }
     }
 
     /**
@@ -171,11 +287,9 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
 
                     @Override
-
                     public void onComplete(@NonNull Task<Location> locationResult) {
                         if (locationResult.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
-//TODO mLastKnownLocation = locationResult.getResult();
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),  //mLastKnownLocation is Null here //Try finding your location in the Google Maps app first, then launch the PostIT app
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
@@ -277,5 +391,35 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
         }
+    }
+
+    public void FragmentArgs(){
+        //check for marker, if no marker is set use current location
+        if (!markerExist) {
+            double[] loc ={mLastKnownLocation.getLongitude(),mLastKnownLocation.getLatitude()};
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(argKey, loc);
+
+            Fragment fragment = new ComposeMsgFragment();
+            fragment.setArguments(bundle);
+            replaceFragment(fragment);
+        }
+        //use marker location
+        else {
+            double[] loc = {marker.getPosition().longitude, marker.getPosition().latitude};
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(argKey, loc);
+
+            Fragment fragment = new ComposeMsgFragment();
+            fragment.setArguments(bundle);
+            replaceFragment(fragment);
+        }
+    }
+
+    public void replaceFragment(Fragment someFragment) {
+        android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

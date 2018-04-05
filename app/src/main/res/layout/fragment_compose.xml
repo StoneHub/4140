@@ -6,11 +6,57 @@
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="28dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/changeLocBtn"
+        android:layout_marginBottom="23dp"
+        android:layout_marginStart="44dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="NAME" />
+        android:selectAllOnFocus="true"
+        android:text="Whats the Note?" />
+
+    <Button
+        android:id="@+id/changeLocBtn"
+        android:layout_width="349dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="86dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/whoNo"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/changeLocBtn"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="15dp"
+        android:isScrollContainer="false"
+        android:phoneNumber="false"
+        android:popupBackground="@color/common_google_signin_btn_text_light_focused"
+        android:text="Who can pick up your Note?" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="329dp"
+        android:layout_height="251dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/whoNo"
+        android:layout_marginTop="174dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/editText2"
+        android:layout_toEndOf="@+id/editText2"
+        android:text="Post - IT" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="53dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/editText2"
+        android:background="@drawable/ic_menu_camera" />
 </RelativeLayout>
