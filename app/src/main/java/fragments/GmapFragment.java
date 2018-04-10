@@ -144,7 +144,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         if (ContextCompat.checkSelfPermission(getActivity(), FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
-            Toast.makeText(getActivity(),"My Location Button Enabled.", Toast.LENGTH_SHORT).show();
         }
 
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
@@ -163,6 +162,8 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
             @Override
             public void onMapClick(LatLng latLng) {
+
+                Toast.makeText(getActivity(), "You picked a Note location!", Toast.LENGTH_SHORT).show();
                 markerExist = true;
                 marker = new MarkerOptions();
                 marker.position(latLng);
@@ -182,6 +183,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
         leaveRandomNotes();
 
+        Toast.makeText(getActivity(), "Tap to place a Note", Toast.LENGTH_LONG).show();
     }
 
     private void leaveRandomNotes() {
