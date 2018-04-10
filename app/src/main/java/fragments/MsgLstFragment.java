@@ -23,4 +23,8 @@ public class MsgLstFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+    }
 }

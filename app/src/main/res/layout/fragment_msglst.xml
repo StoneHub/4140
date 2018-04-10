@@ -1,25 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_main"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/small_layout_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@drawable/main_background"
+    android:clickable="true"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <RelativeLayout
+        android:id="@+id/small_layout_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/white"
-        android:scrollbars="vertical" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:background="@drawable/main_background"
+        android:clickable="true"
+        android:orientation="vertical"
+        tools:ignore="DuplicateIds">
+
+        <ImageView
+            android:id="@+id/smsImage"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_margin="@dimen/margin_imageview"
+            android:src="@drawable/ic_account_circle_black_36dp" />
+
+        <TextView
+            android:id="@+id/smsSender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_imageview"
+            android:layout_marginTop="@dimen/margin_sender"
+            android:layout_toRightOf="@id/smsImage"
+            android:text="@string/title"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryText" />
+
+        <TextView
+            android:id="@+id/smsContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/smsSender"
+            android:layout_marginRight="@dimen/margin_imageview"
+            android:layout_toRightOf="@id/smsImage"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/content_small"
+            android:textSize="@dimen/previewMessageSize" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/smsContent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/smsImage"
+            android:textColor="@color/colorPrimaryThird"
+            android:visibility="visible" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
