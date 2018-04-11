@@ -53,7 +53,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
-    private final LatLng mDefaultLocation = new LatLng(34.6834, -82.8374);
+    private final LatLng mDefaultLocation = new LatLng(34.6834, -82.8374); //clemson DT
     private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean mLocationPermissionGranted;
@@ -132,19 +132,19 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
      */
     @Override
     public void onMapReady(final GoogleMap map) {
+
+        Toast.makeText(getActivity(), "Tap to place a Note", Toast.LENGTH_LONG).show();
         mMap = map;
         //disable Map Toolbar
         mMap.getUiSettings().setMapToolbarEnabled(false);
 
-        //get location
-        mLastKnownLocation = new Location(LocationManager.GPS_PROVIDER);
-        mLastKnownLocation.setLatitude(mDefaultLocation.latitude);
-        mLastKnownLocation.setLongitude(mDefaultLocation.longitude);
-
         if (ContextCompat.checkSelfPermission(getActivity(), FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
+            getDeviceLocation();
         }
+
+        leaveRandomNotes();
 
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -158,8 +158,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         //Place marker
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
-            public double randomLat(double lat){ return(lat); }
-
             @Override
             public void onMapClick(LatLng latLng) {
 
@@ -172,18 +170,8 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 mMap.clear();
                 mMap.addMarker(marker);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-
-                for(int x=0; x< 10; x++) {
-                    mailMarker = mMap.addMarker(new MarkerOptions()
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                            .position(messageCoord[x]).title("Sender of Msg"));
-                }
             }
         });
-
-        leaveRandomNotes();
-
-        Toast.makeText(getActivity(), "Tap to place a Note", Toast.LENGTH_LONG).show();
     }
 
     private void leaveRandomNotes() {
@@ -200,6 +188,37 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
+    /*
+     * Get the best and most recent location of the device, which may be null in rare
+     * cases when a location is not available.
+     */
+    private void getDeviceLocation() {
+        try {
+            if (mLocationPermissionGranted) {
+                Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
+                locationResult.addOnCompleteListener(getActivity(), new OnCompleteListener<Location>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Location> task) {
+                        if (task.isSuccessful()) {
+                            // Set the map's camera position to the current location of the device.
+                            mLastKnownLocation = task.getResult();
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                    new LatLng(mLastKnownLocation.getLatitude(),
+                                            mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                        } else {
+                            Log.d(TAG, "Current location is null. Using defaults.");
+                            Log.e(TAG, "Exception: %s", task.getException());
+                            mMap.moveCamera(CameraUpdateFactory
+                                    .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+                            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                        }
+                    }
+                });
+            }
+        } catch (SecurityException e)  {
+            Log.e("Exception: %s", e.getMessage());
+        }
+    }
 
     /**
      * Prompts the user for permission to use the device location.
