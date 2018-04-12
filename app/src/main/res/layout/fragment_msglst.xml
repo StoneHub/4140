@@ -55,7 +55,6 @@
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/msg_1"
                 android:textSize="@dimen/previewMessageSize" />
 
             <TextView
@@ -112,7 +111,6 @@
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/msg_2"
                 android:textSize="@dimen/previewMessageSize" />
 
             <TextView
@@ -170,7 +168,6 @@
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/msg_3"
                 android:textSize="@dimen/previewMessageSize" />
 
             <TextView
@@ -227,7 +224,6 @@
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/msg_4"
                 android:textSize="@dimen/previewMessageSize" />
 
             <TextView
@@ -284,7 +280,6 @@
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/msg_5"
                 android:textSize="@dimen/previewMessageSize" />
 
             <TextView
@@ -341,7 +336,6 @@
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/msg_6"
                 android:textSize="@dimen/previewMessageSize" />
 
             <TextView
