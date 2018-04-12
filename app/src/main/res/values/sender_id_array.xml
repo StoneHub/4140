@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="sender_id_array">
+        <item>@id/sender1</item>
+        <item>@id/sender2</item>
+        <item>@id/sender3</item>
+        <item>@id/sender4</item>
+        <item>@id/sender5</item>
+        <item>@id/sender6</item>
+    </integer-array>
+</resources>

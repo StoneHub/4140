@@ -37,13 +37,12 @@
                 android:src="@drawable/ic_account_circle_black_36dp" />
 
             <TextView
-                android:id="@+id/smsSender1"
+                android:id="@+id/sender1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_marginTop="@dimen/margin_sender"
                 android:layout_toEndOf="@id/smsImage"
-                android:text="@string/name_1"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText" />
 
@@ -51,7 +50,7 @@
                 android:id="@+id/smsContent1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsSender1"
+                android:layout_below="@id/sender1"
                 android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
@@ -95,13 +94,12 @@
                 android:src="@drawable/ic_account_circle_black_36dp" />
 
             <TextView
-                android:id="@+id/smsSender2"
+                android:id="@+id/sender2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_marginTop="@dimen/margin_sender"
                 android:layout_toEndOf="@id/smsImage"
-                android:text="@string/name_2"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText" />
 
@@ -109,7 +107,7 @@
                 android:id="@+id/smsContent2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsSender2"
+                android:layout_below="@id/sender2"
                 android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
@@ -154,13 +152,12 @@
                 android:src="@drawable/ic_account_circle_black_36dp" />
 
             <TextView
-                android:id="@+id/smsSender3"
+                android:id="@+id/sender3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_marginTop="@dimen/margin_sender"
                 android:layout_toEndOf="@id/smsImage"
-                android:text="@string/name_3"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText" />
 
@@ -168,7 +165,7 @@
                 android:id="@+id/smsContent3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsSender3"
+                android:layout_below="@id/sender3"
                 android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
@@ -212,13 +209,12 @@
                 android:contentDescription="@string/profile_pic_desc" />
 
             <TextView
-                android:id="@+id/smsSender4"
+                android:id="@+id/sender4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_marginTop="@dimen/margin_sender"
                 android:layout_toEndOf="@id/smsImage"
-                android:text="@string/name_4"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText" />
 
@@ -226,7 +222,7 @@
                 android:id="@+id/smsContent4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsSender4"
+                android:layout_below="@id/sender4"
                 android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
@@ -270,13 +266,12 @@
                 android:src="@drawable/ic_account_circle_black_36dp" />
 
             <TextView
-                android:id="@+id/smsSender5"
+                android:id="@+id/sender5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_marginTop="@dimen/margin_sender"
                 android:layout_toEndOf="@id/smsImage"
-                android:text="@string/name_5"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText" />
 
@@ -284,7 +279,7 @@
                 android:id="@+id/smsContent5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsSender5"
+                android:layout_below="@id/sender5"
                 android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
@@ -328,13 +323,12 @@
                 android:src="@drawable/ic_account_circle_black_36dp" />
 
             <TextView
-                android:id="@+id/smsSender6"
+                android:id="@+id/sender6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_marginTop="@dimen/margin_sender"
                 android:layout_toEndOf="@id/smsImage"
-                android:text="@string/name_6"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText" />
 
@@ -342,7 +336,7 @@
                 android:id="@+id/smsContent6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsSender6"
+                android:layout_below="@id/sender6"
                 android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"

@@ -26,7 +26,9 @@
             android:isScrollContainer="false"
             android:popupBackground="@color/place_autocomplete_search_hint"
             android:text="@string/who_can_pick_up_your_note"
-            android:textColorLink="@color/colorPrimary" />
+            android:textColorLink="@color/colorPrimary"
+            android:selectAllOnFocus="true"
+            />
 
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"

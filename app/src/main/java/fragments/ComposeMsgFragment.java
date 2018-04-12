@@ -90,7 +90,7 @@ public class ComposeMsgFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        String[] contacts = getResources().getStringArray(R.array.senders);
+        String[] contacts = getResources().getStringArray(R.array.msgNamesArray);
         MultiAutoCompleteTextView whoNum = getView().findViewById(R.id.whoNumTxt);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_dropdown_item_1line ,contacts);
         whoNum.setAdapter(adapter);
