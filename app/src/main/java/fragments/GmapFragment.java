@@ -134,7 +134,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
      */
     @Override
     public void onMapReady(final GoogleMap map) {
-
         mMap = map;
         //disable Map Toolbar
         mMap.getUiSettings().setMapToolbarEnabled(false);
@@ -164,6 +163,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+                Toast.makeText(getActivity(), "Press me to Place a Note", Toast.LENGTH_SHORT).show();
                 markerExist = true;
                 marker = new MarkerOptions();
                 marker.position(latLng);
@@ -173,7 +173,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 mMap.addMarker(marker);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 fab.startAnimation(btnAnim);
-                Toast.makeText(getActivity(), "You picked a Note location!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -191,7 +190,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                     .position(messageCoord[x]).title("Sender of Msg"));
         }
         Toast.makeText(getActivity(), "Tap to place a Note", Toast.LENGTH_LONG).show();
-
     }
 
     /**
@@ -237,7 +235,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
          */
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
-
         if (ContextCompat.checkSelfPermission(getActivity(),FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             if (ContextCompat.checkSelfPermission(getActivity(),COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
@@ -261,8 +258,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
             fragment.setArguments(bundle);
             replaceFragment(fragment);
         }
-        //use marker location
-        else {
+        else { //use marker location
             double[] loc = {marker.getPosition().longitude, marker.getPosition().latitude};
             Bundle bundle = new Bundle();
             bundle.putSerializable(argKey, loc);

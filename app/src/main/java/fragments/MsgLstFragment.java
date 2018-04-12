@@ -28,17 +28,26 @@ public class MsgLstFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         String[] contacts = getResources().getStringArray(R.array.msgNamesArray);
+        String[] notes = getResources().getStringArray(R.array.msg_contents_array);
+        TypedArray notesTyped = getResources().obtainTypedArray(R.array.msg_id_array);
         TypedArray contactID = getResources().obtainTypedArray(R.array.sender_id_array);
         int count = contactID.length();
-        int[] ids = new int[count];
-        for (int i=0; i < ids.length; i++){
-            ids[i] = contactID.getResourceId(i,0);
+        int[] senderIds = new int[count];
+        int[] msgIds = new int[count];
+        for (int i=0; i < senderIds.length; i++){
+            senderIds[i] = contactID.getResourceId(i,0);
+            msgIds[i] = notesTyped.getResourceId(i,0);
         }
         contactID.recycle();
+        notesTyped.recycle();
 
-        for (int i=0; i < ids.length; i++){
-            TextView senderTxtView = getView().findViewById(ids[i]);
+        for (int i=0; i < senderIds.length; i++){
+            TextView senderTxtView = getView().findViewById(senderIds[i]);
             senderTxtView.setText(contacts[i]);
+        }
+        for (int i =0; i < msgIds.length; i++){
+            TextView msgTxtView = getView().findViewById(msgIds[i]);
+            msgTxtView.setText(notes[i]);
         }
     }
 }

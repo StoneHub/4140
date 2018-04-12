@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="msg_contents_array">
+        <item>Sometimes I'll start a sentence and I don't even know where it's going. I just hope I find it along the way</item>
+        <item>I love a good quitting story. It makes me feel like I have control over my own life. Gives me hope. Maybe I will have one of own someday. [laughs] But I dream... so...</item>
+        <item>The only difference between me and a homeless man is this job. I will do whatever it takes to survive…like I did when I was a homeless man.</item>
+        <item> I know people are only excited to talk to me because of the trial. But if they talk to me for a while, and maybe people realize that I have something to say. And then one day... we're just talking.</item>
+
+    </string-array>
+
     <string name="msg_1">Yeet!</string>
     <string name="msg_2">Where you at?</string>
     <string name="msg_3">Im Here!</string>
