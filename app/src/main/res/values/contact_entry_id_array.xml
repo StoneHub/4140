@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="contact_id_array">
+        <item>@id/small_contact_entry1</item>
+        <item>@id/small_contact_entry2</item>
+        <item>@id/small_contact_entry3</item>
+        <item>@id/small_contact_entry4</item>
+        <item>@id/small_contact_entry5</item>
+        <item>@id/small_contact_entry6</item>
+    </integer-array>
+</resources>
