@@ -9,11 +9,14 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        class="com.google.android.gms.maps.MapFragment"></fragment>
+
    <android.support.design.widget.FloatingActionButton
        android:id="@+id/fab"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
+       android:layout_width="68dp"
+       android:layout_height="82dp"
        android:layout_gravity="bottom|end"
        android:layout_margin="@dimen/fab_margin"
+       app:elevation="24dp"
+       app:fabSize="normal"
        app:srcCompat="@android:drawable/ic_dialog_email" />
 </FrameLayout>

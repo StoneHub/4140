@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.cpsc41400.a4140app.R;
@@ -145,7 +147,11 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
         leaveRandomNotes();
 
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        final Animation btnAnim = AnimationUtils.loadAnimation(getActivity(),R.anim.bounce);
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+        btnAnim.setInterpolator(interpolator);
+        fab.startAnimation(btnAnim);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -156,11 +162,8 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
         //Place marker
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-
             @Override
             public void onMapClick(LatLng latLng) {
-
-                Toast.makeText(getActivity(), "You picked a Note location!", Toast.LENGTH_SHORT).show();
                 markerExist = true;
                 marker = new MarkerOptions();
                 marker.position(latLng);
@@ -169,6 +172,8 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 mMap.clear();
                 mMap.addMarker(marker);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                fab.startAnimation(btnAnim);
+                Toast.makeText(getActivity(), "You picked a Note location!", Toast.LENGTH_SHORT).show();
             }
         });
     }

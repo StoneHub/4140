@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_gallery) {
             Toast.makeText(this, "Image Notes coming Soon!", Toast.LENGTH_SHORT).show();
+
         }
         else if (id == R.id.Msg_List_View) {
             fm.beginTransaction().replace(R.id.content_frame, new MsgLstFragment()).commit();
