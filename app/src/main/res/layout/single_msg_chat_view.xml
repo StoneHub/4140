@@ -7,6 +7,16 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/sender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_imageview"
+        android:layout_marginTop="@dimen/margin_sender"
+        android:layout_toEndOf="@id/smsImage"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryText" />
+
+    <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

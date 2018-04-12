@@ -31,11 +31,14 @@ public class ViewMsgFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         TextView noteView = getView().findViewById(R.id.message);
+        TextView senderView = getView().findViewById(R.id.sender);
         noteView.setAllCaps(false);
+        senderView.setAllCaps(false);
         TypedArray contactListID = getResources().obtainTypedArray(R.array.contact_id_array);
         String[] notes = getResources().getStringArray(R.array.msg_contents_array);
+        String[] contacts = getResources().getStringArray(R.array.msgNamesArray);
 
-
+        //build an array of ints that hold the R.id numbers for each contact block
         int[] contactListIds = new int[contactListID.length()];
         for (int i=0; i < contactListID.length(); i++){
             contactListIds[i] = contactListID.getResourceId(i, 0);
@@ -44,6 +47,7 @@ public class ViewMsgFragment extends Fragment {
         for (int i=0; i < contactListIds.length; i++) {
             if(contactListIds[i] == cID){
                 noteView.setText(notes[i]);
+                senderView.setText(contacts[i]);
             }
         }
 
