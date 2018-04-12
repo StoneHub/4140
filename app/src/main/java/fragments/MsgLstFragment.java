@@ -18,6 +18,9 @@ import com.cpsc41400.a4140app.R;
 
 public class MsgLstFragment extends Fragment {
 
+    private static final String argKey = "argKey";
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class MsgLstFragment extends Fragment {
         int count = contactListID.length();
         int[] senderIds = new int[count];
         int[] msgIds = new int[count];
-        int[] contactListIds = new int[count];
+        final int[] contactListIds = new int[count];
         for (int i=0; i < senderIds.length; i++){
             senderIds[i] = contactID.getResourceId(i,0);
             msgIds[i] = notesID.getResourceId(i,0);
@@ -60,19 +63,20 @@ public class MsgLstFragment extends Fragment {
 
         for(int i=0; i < contactListIds.length; i++){
             RelativeLayout rl = (RelativeLayout)getView().findViewById(contactListIds[i]);
+            final int cID = contactListIds[i];
+
             rl.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(argKey,cID);
+
                     Fragment fragment = new ViewMsgFragment();
-//        fragment.setArguments(bundle);
+                    fragment.setArguments(bundle);
                     replaceFragment(fragment);
                 }
             });
         }
-
-
-
     }
-
 
 public void replaceFragment(Fragment someFragment) {
         android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
