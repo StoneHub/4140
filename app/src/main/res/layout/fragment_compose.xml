@@ -2,61 +2,72 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/changeLocBtn"
-        android:layout_marginBottom="23dp"
-        android:layout_marginStart="44dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:selectAllOnFocus="true"
-        android:text="Whats the Note?" />
+    <LinearLayout
+        android:id="@+id/autocomplete"
+        android:layout_width="match_parent"
+        android:layout_height="466dp"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/changeLocBtn"
-        android:layout_width="349dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="86dp" />
+        <Button
+            android:id="@+id/changeLocBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/change_note_loc" />
 
-    <AutoCompleteTextView
-        android:id="@+id/whoNo"
-        android:layout_width="330dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/changeLocBtn"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="15dp"
-        android:isScrollContainer="false"
-        android:phoneNumber="false"
-        android:popupBackground="@color/common_google_signin_btn_text_light_focused"
-        android:text="Who can pick up your Note?" />
+        <MultiAutoCompleteTextView
+            android:id="@+id/whoNumTxt"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="15dp"
+            android:completionThreshold="1"
+            android:isScrollContainer="false"
+            android:popupBackground="@color/place_autocomplete_search_hint"
+            android:text="@string/who_can_pick_up_your_note"
+            android:textColorLink="@color/colorPrimary" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="329dp"
-        android:layout_height="251dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/whoNo"
-        android:layout_marginTop="174dp" />
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editText2"
-        android:layout_toEndOf="@+id/editText2"
-        android:text="Post - IT" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="53dp"
+    </LinearLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/editText2"
-        android:background="@drawable/ic_menu_camera" />
+        android:layout_below="@id/autocomplete"
+        android:backgroundTint="@color/colorPrimaryDark">
+
+        <Button
+            android:id="@+id/postBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/post_it"
+            android:layout_gravity="end"/>
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginBottom="23dp"
+            android:layout_marginStart="52dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:selectAllOnFocus="true"
+            android:text="@string/whats_the_note" />
+
+        <Button
+            android:id="@+id/camBtn"
+            android:layout_width="53dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_menu_camera"
+            android:layout_gravity="start"/>
+    </android.support.design.widget.CoordinatorLayout>
+
+
 </RelativeLayout>

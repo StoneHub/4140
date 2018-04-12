@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import fragments.GmapFragment;
 import fragments.MsgLstFragment;
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_gallery) {
-
+            Toast.makeText(this, "Image Notes coming Soon!", Toast.LENGTH_SHORT).show();
         }
         else if (id == R.id.Msg_List_View) {
             fm.beginTransaction().replace(R.id.content_frame, new MsgLstFragment()).commit();

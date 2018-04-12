@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="senders">
+        <item>Michael S</item>
+        <item>Oscar M</item>
+        <item>Creed B</item>
+        <item>Darryl P</item>
+        <item>Jim H</item>
+        <item>Pam H</item>
+        <item>D Shrute</item>
+        <item>Kevin M</item>
+        <item>Andy B</item>
+        <item>Toby F</item>
+    </string-array>
+</resources>

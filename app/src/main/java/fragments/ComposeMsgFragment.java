@@ -6,9 +6,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
 import com.cpsc41400.a4140app.R;
@@ -21,16 +22,15 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
 /**
- * Created by monro on 3/27/2018.
+ * Created by monroe on 3/27/2018.
  */
 
 public class ComposeMsgFragment extends Fragment {
 
-    private AdapterView.OnItemClickListener onContactClickListener;
     private static final String argKey = "argKey";
     private Button updateLocBtn;
+    private Button cameraBtn;
 
     MapView mMapView;
     private GoogleMap googleMap;
@@ -45,15 +45,20 @@ public class ComposeMsgFragment extends Fragment {
         final LatLng latLng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
 
 
-
         updateLocBtn = rootView.findViewById(R.id.changeLocBtn);
-        String latlng = "Press to change Note location";
-        updateLocBtn.setText(latlng);
         updateLocBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment =  new GmapFragment();
                 replaceFragment(fragment);
+            }
+        });
+
+        cameraBtn = rootView.findViewById(R.id.camBtn);
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Camera Feature Coming Soon!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -85,10 +90,11 @@ public class ComposeMsgFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        AutoCompleteTextView actv = getView().findViewById(R.id.whoNo);
-        actv.setOnItemClickListener(onContactClickListener);
-
+        String[] contacts = getResources().getStringArray(R.array.senders);
+        MultiAutoCompleteTextView whoNum = getView().findViewById(R.id.whoNumTxt);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_dropdown_item_1line ,contacts);
+        whoNum.setAdapter(adapter);
+        whoNum.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
     }
 
     public void replaceFragment(Fragment someFragment) {
@@ -97,11 +103,4 @@ public class ComposeMsgFragment extends Fragment {
     transaction.addToBackStack(null);
     transaction.commit();
 }
-
-
-
-
-
-
-
 }

@@ -14,5 +14,10 @@
     <string name="sms_delivered">SMS delivered</string>
     <string name="sms_not_delivered">SMS not delivered</string>
     <string name="write_message">Write Message..</string>
+    <string name="profile_pic_desc">Profile Pic</string>
+    <string name="change_note_loc">Change Note location</string>
+    <string name="who_can_pick_up_your_note">Who can pick up your Note?</string>
+    <string name="post_it">Post - IT</string>
+    <string name="whats_the_note">Whats the Note?</string>
 
 </resources>

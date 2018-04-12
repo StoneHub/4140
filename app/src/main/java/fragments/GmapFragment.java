@@ -133,7 +133,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(final GoogleMap map) {
 
-        Toast.makeText(getActivity(), "Tap to place a Note", Toast.LENGTH_LONG).show();
         mMap = map;
         //disable Map Toolbar
         mMap.getUiSettings().setMapToolbarEnabled(false);
@@ -186,9 +185,11 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                     .position(messageCoord[x]).title("Sender of Msg"));
         }
+        Toast.makeText(getActivity(), "Tap to place a Note", Toast.LENGTH_LONG).show();
+
     }
 
-    /*
+    /**
      * Get the best and most recent location of the device, which may be null in rare
      * cases when a location is not available.
      */
@@ -243,7 +244,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
             ActivityCompat.requestPermissions(getActivity(),permissions,LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
-
 
     public void composeNoteFragmentSwitcher(){
         //check for marker, if no marker is set use current location

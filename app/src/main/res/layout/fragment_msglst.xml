@@ -15,7 +15,8 @@
         android:layout_height="match_parent"
         android:background="@drawable/main_background"
         android:clickable="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:focusable="true">
 
         <RelativeLayout
             android:id="@+id/small_layout_main"
@@ -24,33 +25,35 @@
             android:background="@drawable/main_background"
             android:clickable="true"
             android:orientation="vertical"
-            tools:ignore="DuplicateIds">
+            tools:ignore="DuplicateIds"
+            android:focusable="true">
 
             <ImageView
                 android:id="@+id/smsImage"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_margin="@dimen/margin_imageview"
+                android:contentDescription="@string/profile_pic_desc"
                 android:src="@drawable/ic_account_circle_black_36dp" />
 
             <TextView
-                android:id="@+id/smsSender"
+                android:id="@+id/smsSender1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_imageview"
+                android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_marginTop="@dimen/margin_sender"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_toEndOf="@id/smsImage"
                 android:text="@string/name_1"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText" />
 
             <TextView
-                android:id="@+id/smsContent"
+                android:id="@+id/smsContent1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsSender"
-                android:layout_marginRight="@dimen/margin_imageview"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_below="@id/smsSender1"
+                android:layout_marginEnd="@dimen/margin_imageview"
+                android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/msg_1"
@@ -60,10 +63,10 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsContent"
+                android:layout_below="@id/smsContent1"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="2dp"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_toEndOf="@id/smsImage"
                 android:textColor="@color/colorPrimaryThird"
                 android:visibility="visible" />
 
@@ -79,7 +82,8 @@
             android:background="@drawable/main_background"
             android:clickable="true"
             android:orientation="vertical"
-            tools:ignore="DuplicateIds">
+            tools:ignore="DuplicateIds"
+            android:focusable="true">
 
 
             <ImageView
@@ -87,26 +91,27 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_margin="@dimen/margin_imageview"
+                android:contentDescription="@string/profile_pic_desc"
                 android:src="@drawable/ic_account_circle_black_36dp" />
 
             <TextView
-                android:id="@+id/smsSender"
+                android:id="@+id/smsSender2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_imageview"
+                android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_marginTop="@dimen/margin_sender"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_toEndOf="@id/smsImage"
                 android:text="@string/name_2"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText" />
 
             <TextView
-                android:id="@+id/smsContent"
+                android:id="@+id/smsContent2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsSender"
-                android:layout_marginRight="@dimen/margin_imageview"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_below="@id/smsSender2"
+                android:layout_marginEnd="@dimen/margin_imageview"
+                android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/msg_2"
@@ -116,10 +121,10 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsContent"
+                android:layout_below="@id/smsContent2"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="2dp"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_toEndOf="@id/smsImage"
                 android:textColor="@color/colorPrimaryThird"
                 android:visibility="visible" />
 
@@ -134,6 +139,8 @@
             android:layout_below="@+id/small_layout_main2"
             android:background="@drawable/main_background"
             android:clickable="true"
+            android:fadingEdge="horizontal"
+            android:focusable="true"
             android:orientation="vertical"
             tools:ignore="DuplicateIds">
 
@@ -143,26 +150,27 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_margin="@dimen/margin_imageview"
+                android:contentDescription="@string/profile_pic_desc"
                 android:src="@drawable/ic_account_circle_black_36dp" />
 
             <TextView
-                android:id="@+id/smsSender"
+                android:id="@+id/smsSender3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_imageview"
+                android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_marginTop="@dimen/margin_sender"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_toEndOf="@id/smsImage"
                 android:text="@string/name_3"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText" />
 
             <TextView
-                android:id="@+id/smsContent"
+                android:id="@+id/smsContent3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsSender"
-                android:layout_marginRight="@dimen/margin_imageview"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_below="@id/smsSender3"
+                android:layout_marginEnd="@dimen/margin_imageview"
+                android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/msg_3"
@@ -172,10 +180,10 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsContent"
+                android:layout_below="@id/smsContent3"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="2dp"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_toEndOf="@id/smsImage"
                 android:textColor="@color/colorPrimaryThird"
                 android:visibility="visible" />
 
@@ -191,7 +199,8 @@
             android:background="@drawable/main_background"
             android:clickable="true"
             android:orientation="vertical"
-            tools:ignore="DuplicateIds">
+            tools:ignore="DuplicateIds"
+            android:focusable="true">
 
 
             <ImageView
@@ -199,26 +208,27 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_margin="@dimen/margin_imageview"
-                android:src="@drawable/ic_account_circle_black_36dp" />
+                android:src="@drawable/ic_account_circle_black_36dp"
+                android:contentDescription="@string/profile_pic_desc" />
 
             <TextView
-                android:id="@+id/smsSender"
+                android:id="@+id/smsSender4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_imageview"
+                android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_marginTop="@dimen/margin_sender"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_toEndOf="@id/smsImage"
                 android:text="@string/name_4"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText" />
 
             <TextView
-                android:id="@+id/smsContent"
+                android:id="@+id/smsContent4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsSender"
-                android:layout_marginRight="@dimen/margin_imageview"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_below="@id/smsSender4"
+                android:layout_marginEnd="@dimen/margin_imageview"
+                android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/msg_4"
@@ -228,10 +238,10 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsContent"
+                android:layout_below="@id/smsContent4"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="2dp"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_toEndOf="@id/smsImage"
                 android:textColor="@color/colorPrimaryThird"
                 android:visibility="visible" />
 
@@ -247,7 +257,8 @@
             android:background="@drawable/main_background"
             android:clickable="true"
             android:orientation="vertical"
-            tools:ignore="DuplicateIds">
+            tools:ignore="DuplicateIds"
+            android:focusable="true">
 
 
             <ImageView
@@ -255,26 +266,27 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_margin="@dimen/margin_imageview"
+                android:contentDescription="@string/profile_pic_desc"
                 android:src="@drawable/ic_account_circle_black_36dp" />
 
             <TextView
-                android:id="@+id/smsSender"
+                android:id="@+id/smsSender5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_imageview"
+                android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_marginTop="@dimen/margin_sender"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_toEndOf="@id/smsImage"
                 android:text="@string/name_5"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText" />
 
             <TextView
-                android:id="@+id/smsContent"
+                android:id="@+id/smsContent5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsSender"
-                android:layout_marginRight="@dimen/margin_imageview"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_below="@id/smsSender5"
+                android:layout_marginEnd="@dimen/margin_imageview"
+                android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/msg_5"
@@ -284,10 +296,10 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsContent"
+                android:layout_below="@id/smsContent5"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="2dp"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_toEndOf="@id/smsImage"
                 android:textColor="@color/colorPrimaryThird"
                 android:visibility="visible" />
 
@@ -303,7 +315,8 @@
             android:background="@drawable/main_background"
             android:clickable="true"
             android:orientation="vertical"
-            tools:ignore="DuplicateIds">
+            tools:ignore="DuplicateIds"
+            android:focusable="true">
 
 
             <ImageView
@@ -311,26 +324,27 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_margin="@dimen/margin_imageview"
+                android:contentDescription="@string/profile_pic_desc"
                 android:src="@drawable/ic_account_circle_black_36dp" />
 
             <TextView
-                android:id="@+id/smsSender"
+                android:id="@+id/smsSender6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/margin_imageview"
+                android:layout_marginEnd="@dimen/margin_imageview"
                 android:layout_marginTop="@dimen/margin_sender"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_toEndOf="@id/smsImage"
                 android:text="@string/name_6"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryText" />
 
             <TextView
-                android:id="@+id/smsContent"
+                android:id="@+id/smsContent6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsSender"
-                android:layout_marginRight="@dimen/margin_imageview"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_below="@id/smsSender6"
+                android:layout_marginEnd="@dimen/margin_imageview"
+                android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@string/msg_6"
@@ -340,10 +354,10 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/smsContent"
+                android:layout_below="@id/smsContent6"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="2dp"
-                android:layout_toRightOf="@id/smsImage"
+                android:layout_toEndOf="@id/smsImage"
                 android:textColor="@color/colorPrimaryThird"
                 android:visibility="visible" />
 
