@@ -92,10 +92,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         }
         try {
             view = inflater.inflate(R.layout.fragment_gmap, container, false);
-        } catch (android.view.InflateException e) {
-        /* map is already there, just return view as it is */
-        Toast.makeText(getActivity(),"Returned to Map",Toast.LENGTH_SHORT).show();
-        }
+        } catch (android.view.InflateException e) {}
         return view;
     }
 
@@ -134,7 +131,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
      */
     @Override
     public void onMapReady(final GoogleMap map) {
-
         mMap = map;
         //disable Map Toolbar
         mMap.getUiSettings().setMapToolbarEnabled(false);
@@ -155,6 +151,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fab.startAnimation(btnAnim);
                 //Bundle up the current latlng, and spin up a new Fragment with the passed arguments
                 composeNoteFragmentSwitcher();
             }
@@ -164,6 +161,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+                Toast.makeText(getActivity(), "Press me to Place a Note", Toast.LENGTH_SHORT).show();
                 markerExist = true;
                 marker = new MarkerOptions();
                 marker.position(latLng);
@@ -173,7 +171,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 mMap.addMarker(marker);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 fab.startAnimation(btnAnim);
-                Toast.makeText(getActivity(), "You picked a Note location!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -191,7 +188,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                     .position(messageCoord[x]).title("Sender of Msg"));
         }
         Toast.makeText(getActivity(), "Tap to place a Note", Toast.LENGTH_LONG).show();
-
     }
 
     /**
@@ -237,7 +233,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
          */
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
-
         if (ContextCompat.checkSelfPermission(getActivity(),FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             if (ContextCompat.checkSelfPermission(getActivity(),COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
@@ -251,24 +246,26 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void composeNoteFragmentSwitcher(){
+        Bundle bundleBundle = new Bundle();
         //check for marker, if no marker is set use current location
         if (!markerExist) {
             double[] loc ={mLastKnownLocation.getLongitude(),mLastKnownLocation.getLatitude()};
             Bundle bundle = new Bundle();
-            bundle.putSerializable(argKey, loc);
+            bundle.putSerializable("locKey", loc);
+            bundleBundle.putBundle("bundlelocKey",bundle);
 
             Fragment fragment = new ComposeMsgFragment();
-            fragment.setArguments(bundle);
+            fragment.setArguments(bundleBundle);
             replaceFragment(fragment);
         }
-        //use marker location
-        else {
+        else { //use marker location
             double[] loc = {marker.getPosition().longitude, marker.getPosition().latitude};
             Bundle bundle = new Bundle();
-            bundle.putSerializable(argKey, loc);
+            bundle.putSerializable("locKey", loc);
+            bundleBundle.putBundle("bundlelocKey",bundle);
 
             Fragment fragment = new ComposeMsgFragment();
-            fragment.setArguments(bundle);
+            fragment.setArguments(bundleBundle);
             replaceFragment(fragment);
         }
     }

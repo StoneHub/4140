@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="msg_1">Yeet is this working?!</string>
-    <string name="msg_2">Where you at?</string>
-    <string name="msg_3">Im Here!</string>
-    <string name="msg_4">Did that really happen?</string>
-    <string name="msg_5">Its ya boi skinny...</string>
-    <string name="msg_6">Im PREGNANT!!</string>
-    <string name="msg_7">Wait Im the side hoe?</string>
-    <string name="msg_8">I like trains</string>
-    <string name="msg_9">Wait for me</string>
-    <string name="msg_10">Yo hide me Consuela is after me</string>
+    <string-array name="msg_contents_array">
+        <item>Sometimes Ill start a sentence and I dont even know where its going. I just hope I find it along the way</item>
+        <item>I love a good quitting story. It makes me feel like I have control over my own life. Gives me hope. Maybe I will have one of own someday. [laughs] But I dream… so…</item>
+        <item>The only difference between me and a homeless man is this job. I will do whatever it takes to survive…like I did when I was a homeless man.</item>
+        <item> I know people are only excited to talk to me because of the trial. But if they talk to me for a while, and maybe people realize that I have something to say. And then one day… we are just talking.</item>
+        <item>Check out this new study spot I found on Campus</item>
+        <item>Have you checked out the new help at the Reception Desk?</item>
+        <item>The Collage is featuring my Art on the second floor here! Check it out!</item>
+        <item>Why are all these people here? There are too many people on this earth. We need a new plague.</item>
+    </string-array>
 </resources>

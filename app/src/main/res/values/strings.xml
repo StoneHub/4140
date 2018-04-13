@@ -19,5 +19,8 @@
     <string name="who_can_pick_up_your_note">Who can pick up your Note?</string>
     <string name="post_it">Post - IT</string>
     <string name="whats_the_note">Whats the Note?</string>
+    <string name="randomDate">07/3/18</string>
+    <string name="msgViewReply">Reply directly by leaving a Note at your current location</string>
+    <string name="pfailed">Permission Failed</string>
 
 </resources>

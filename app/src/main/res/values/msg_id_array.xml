@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="msg_id_array">
+        <item>@id/smsContent1</item>
+        <item>@id/smsContent2</item>
+        <item>@id/smsContent3</item>
+        <item>@id/smsContent4</item>
+        <item>@id/smsContent5</item>
+        <item>@id/smsContent6</item>
+    </integer-array>
+
+</resources>

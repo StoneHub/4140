@@ -19,7 +19,7 @@
         android:focusable="true">
 
         <RelativeLayout
-            android:id="@+id/small_layout_main"
+            android:id="@+id/small_contact_entry1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/main_background"
@@ -55,7 +55,6 @@
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/msg_1"
                 android:textSize="@dimen/previewMessageSize" />
 
             <TextView
@@ -72,12 +71,12 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/small_layout_main2"
+            android:id="@+id/small_contact_entry2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/small_layout_main"
+            android:layout_below="@+id/small_contact_entry1"
             android:background="@drawable/main_background"
             android:clickable="true"
             android:orientation="vertical"
@@ -112,7 +111,6 @@
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/msg_2"
                 android:textSize="@dimen/previewMessageSize" />
 
             <TextView
@@ -129,12 +127,12 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/small_layout_main3"
+            android:id="@+id/small_contact_entry3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/small_layout_main2"
+            android:layout_below="@+id/small_contact_entry2"
             android:background="@drawable/main_background"
             android:clickable="true"
             android:fadingEdge="horizontal"
@@ -170,7 +168,6 @@
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/msg_3"
                 android:textSize="@dimen/previewMessageSize" />
 
             <TextView
@@ -187,12 +184,12 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/small_layout_main4"
+            android:id="@+id/small_contact_entry4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/small_layout_main3"
+            android:layout_below="@+id/small_contact_entry3"
             android:background="@drawable/main_background"
             android:clickable="true"
             android:orientation="vertical"
@@ -227,7 +224,6 @@
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/msg_4"
                 android:textSize="@dimen/previewMessageSize" />
 
             <TextView
@@ -244,12 +240,12 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/small_layout_main5"
+            android:id="@+id/small_contact_entry5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/small_layout_main4"
+            android:layout_below="@+id/small_contact_entry4"
             android:background="@drawable/main_background"
             android:clickable="true"
             android:orientation="vertical"
@@ -284,7 +280,6 @@
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/msg_5"
                 android:textSize="@dimen/previewMessageSize" />
 
             <TextView
@@ -301,12 +296,12 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/small_layout_main6"
+            android:id="@+id/small_contact_entry6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/small_layout_main5"
+            android:layout_below="@+id/small_contact_entry5"
             android:background="@drawable/main_background"
             android:clickable="true"
             android:orientation="vertical"
@@ -341,7 +336,6 @@
                 android:layout_toEndOf="@id/smsImage"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@string/msg_6"
                 android:textSize="@dimen/previewMessageSize" />
 
             <TextView
