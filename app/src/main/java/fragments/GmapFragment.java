@@ -246,23 +246,26 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void composeNoteFragmentSwitcher(){
+        Bundle bundleBundle = new Bundle();
         //check for marker, if no marker is set use current location
         if (!markerExist) {
             double[] loc ={mLastKnownLocation.getLongitude(),mLastKnownLocation.getLatitude()};
             Bundle bundle = new Bundle();
-            bundle.putSerializable(argKey, loc);
+            bundle.putSerializable("locKey", loc);
+            bundleBundle.putBundle("bundlelocKey",bundle);
 
             Fragment fragment = new ComposeMsgFragment();
-            fragment.setArguments(bundle);
+            fragment.setArguments(bundleBundle);
             replaceFragment(fragment);
         }
         else { //use marker location
             double[] loc = {marker.getPosition().longitude, marker.getPosition().latitude};
             Bundle bundle = new Bundle();
-            bundle.putSerializable(argKey, loc);
+            bundle.putSerializable("locKey", loc);
+            bundleBundle.putBundle("bundlelocKey",bundle);
 
             Fragment fragment = new ComposeMsgFragment();
-            fragment.setArguments(bundle);
+            fragment.setArguments(bundleBundle);
             replaceFragment(fragment);
         }
     }

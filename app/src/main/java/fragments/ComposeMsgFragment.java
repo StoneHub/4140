@@ -28,18 +28,25 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ComposeMsgFragment extends Fragment {
 
-    private static final String argKey = "argKey";
     private Button updateLocBtn;
     private Button cameraBtn;
 
     MapView mMapView;
     private GoogleMap googleMap;
+    String senderID;
 
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_compose, container, false);
 
-        double[] loc = getArguments().getDoubleArray(argKey);
+        Bundle locBundle = getArguments().getBundle("bundlelocKey");
+        Bundle senderBundle = getArguments().getBundle("bundlesenderKey");
+
+        if (senderBundle != null) {
+            senderID = senderBundle.getString("senderKey");
+        }
+
+        double[] loc = locBundle.getDoubleArray("locKey");
         final String lat = Double.toString(loc[1]);
         final String lng = Double.toString(loc[0]);
         final LatLng latLng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
@@ -92,6 +99,9 @@ public class ComposeMsgFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         String[] contacts = getResources().getStringArray(R.array.msgNamesArray);
         MultiAutoCompleteTextView whoNum = getView().findViewById(R.id.whoNumTxt);
+        if(senderID != null){
+            whoNum.setText(senderID);
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_dropdown_item_1line ,contacts);
         whoNum.setAdapter(adapter);
         whoNum.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
