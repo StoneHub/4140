@@ -92,10 +92,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         }
         try {
             view = inflater.inflate(R.layout.fragment_gmap, container, false);
-        } catch (android.view.InflateException e) {
-        /* map is already there, just return view as it is */
-        Toast.makeText(getActivity(),"Returned to Map",Toast.LENGTH_SHORT).show();
-        }
+        } catch (android.view.InflateException e) {}
         return view;
     }
 
@@ -154,6 +151,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fab.startAnimation(btnAnim);
                 //Bundle up the current latlng, and spin up a new Fragment with the passed arguments
                 composeNoteFragmentSwitcher();
             }
