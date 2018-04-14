@@ -19,6 +19,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -91,7 +92,7 @@ public class ComposeMsgFragment extends Fragment {
 
                 // For dropping a marker at a point on the Map
                 if (noteText != null){
-                    googleMap.addMarker(new MarkerOptions().position(latLng).title("Your Note!").snippet(noteText));
+                    googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)).position(latLng).title("Your Note!").snippet(noteText));
                 }else{
                     googleMap.addMarker(new MarkerOptions().position(latLng).title("Post-IT here!").snippet("Say Something"));
                 }

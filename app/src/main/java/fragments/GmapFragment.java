@@ -71,6 +71,8 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
+    private int numOfUnreadNotes;
+
     //Place marker on touch
     private MarkerOptions marker = null;
     private MarkerOptions myNoteMarker;
@@ -111,12 +113,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 receiver = bundle.getBundle("receiverBundle").getString("whoBundle");
            }
         }
-
-//        Bundle noteBundle = getArguments().getBundle("noteBundle");
-//           if (noteBundle != null) {
-//               note = getArguments().getString("noteKey");
-//           }
-
         return view;
     }
 
@@ -187,7 +183,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
             myNoteMarker.title("Your Note to: " + receiver);
             myNoteMarker.snippet(note);
-            myNoteMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+            myNoteMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
             mMap.addMarker(myNoteMarker);
         }
 
@@ -200,25 +196,35 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 marker = new MarkerOptions();
                 marker.position(latLng);
                 marker.title("PostIT here!");
-                //clear previously touch position
                 mMap.clear();
+                if (loc != null){
+                    LatLng myNoteLatLng = new LatLng(loc[1],loc[0]);
+                    myNoteMarker = new MarkerOptions();
+                    myNoteMarker.position(myNoteLatLng);
+
+                    myNoteMarker.title("Your Note to: " + receiver);
+                    myNoteMarker.snippet(note);
+                    myNoteMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+                    mMap.addMarker(myNoteMarker);
+                }
                 mMap.addMarker(marker);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 fab.startAnimation(btnAnim);
             }
         });
 
-        leaveRandomNotes();
     }
 
     private void leaveRandomNotes() {
-        for(int x=0;x<10;x++){
+        for(int x=0;x<5;x++){
             double lat = .0200 * r.nextDouble() + 34.6634;
             double lon = .0200 * r.nextDouble() + 82.8174;
+// TODO           double lat = 0.0200 * r.nextDouble() + mLastKnownLocation.getLatitude();
+//            double lon = .0200 * r.nextDouble() + mLastKnownLocation.getLongitude();
             messageCoord[x] = new LatLng(lat, -lon);
         }
 
-        for(int x=0; x< 10; x++) {
+        for(int x = 0; x < numOfUnreadNotes; x++) {
             mailMarker = mMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                     .position(messageCoord[x]).title("Sender of Msg"));
@@ -250,6 +256,8 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                                     .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
                         }
+//LEAVE RANDOM UNREAD NOTES
+                        leaveRandomNotes();
                     }
                 });
             }
