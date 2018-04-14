@@ -31,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -71,7 +72,8 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     private static final String KEY_LOCATION = "location";
 
     //Place marker on touch
-    MarkerOptions marker = null;
+    private MarkerOptions marker = null;
+    private MarkerOptions myNoteMarker;
     private Marker mailMarker;
     Random r = new Random();
     LatLng[] messageCoord = new LatLng[10];
@@ -81,6 +83,9 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     private boolean markerExist = false;
     private boolean mailExist = false;
     private static View view;
+    private String note;
+    private String receiver;
+    private double[] loc;
 
     @Nullable
     @Override
@@ -93,6 +98,25 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         try {
             view = inflater.inflate(R.layout.fragment_gmap, container, false);
         } catch (android.view.InflateException e) {}
+
+        Bundle bundle = getArguments();
+        if (bundle !=null){
+            if (bundle.containsKey("locBundle")){
+                loc = bundle.getBundle("locBundle").getDoubleArray("locKey");
+            }
+           if (bundle.containsKey("noteBundle")){
+               note = bundle.getBundle("noteBundle").getString("noteKey");
+           }
+           if (bundle.containsKey("receiverBundle")){
+                receiver = bundle.getBundle("receiverBundle").getString("whoBundle");
+           }
+        }
+
+//        Bundle noteBundle = getArguments().getBundle("noteBundle");
+//           if (noteBundle != null) {
+//               note = getArguments().getString("noteKey");
+//           }
+
         return view;
     }
 
@@ -141,8 +165,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
             getDeviceLocation();
         }
 
-        leaveRandomNotes();
-
         final FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         final Animation btnAnim = AnimationUtils.loadAnimation(getActivity(),R.anim.bounce);
         MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
@@ -157,11 +179,23 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        //load arguments of a placed note
+        if (loc != null){
+            LatLng myNoteLatLng = new LatLng(loc[1],loc[0]);
+            myNoteMarker = new MarkerOptions();
+            myNoteMarker.position(myNoteLatLng);
+
+            myNoteMarker.title("Your Note to: " + receiver);
+            myNoteMarker.snippet(note);
+            myNoteMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+            mMap.addMarker(myNoteMarker);
+        }
+
         //Place marker
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                Toast.makeText(getActivity(), "Press me to Place a Note", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Press me to Compose a Note", Toast.LENGTH_SHORT).show();
                 markerExist = true;
                 marker = new MarkerOptions();
                 marker.position(latLng);
@@ -173,6 +207,8 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 fab.startAnimation(btnAnim);
             }
         });
+
+        leaveRandomNotes();
     }
 
     private void leaveRandomNotes() {
@@ -184,7 +220,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
         for(int x=0; x< 10; x++) {
             mailMarker = mMap.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                     .position(messageCoord[x]).title("Sender of Msg"));
         }
         Toast.makeText(getActivity(), "Tap to place a Note", Toast.LENGTH_LONG).show();

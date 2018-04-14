@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
@@ -30,6 +31,10 @@ public class ComposeMsgFragment extends Fragment {
 
     private Button updateLocBtn;
     private Button cameraBtn;
+    private String noteText;
+    private String whoToText;
+
+    Bundle locBundle;
 
     MapView mMapView;
     private GoogleMap googleMap;
@@ -39,7 +44,7 @@ public class ComposeMsgFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_compose, container, false);
 
-        Bundle locBundle = getArguments().getBundle("bundlelocKey");
+        locBundle = getArguments().getBundle("bundlelocKey");
         Bundle senderBundle = getArguments().getBundle("bundlesenderKey");
 
         if (senderBundle != null) {
@@ -50,7 +55,6 @@ public class ComposeMsgFragment extends Fragment {
         final String lat = Double.toString(loc[1]);
         final String lng = Double.toString(loc[0]);
         final LatLng latLng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
-
 
         updateLocBtn = rootView.findViewById(R.id.changeLocBtn);
         updateLocBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +90,11 @@ public class ComposeMsgFragment extends Fragment {
                 googleMap.getUiSettings().setMapToolbarEnabled(false);
 
                 // For dropping a marker at a point on the Map
-                googleMap.addMarker(new MarkerOptions().position(latLng).title("PostIT here!").snippet(lat + lng));
+                if (noteText != null){
+                    googleMap.addMarker(new MarkerOptions().position(latLng).title("Your Note!").snippet(noteText));
+                }else{
+                    googleMap.addMarker(new MarkerOptions().position(latLng).title("Post-IT here!").snippet("Say Something"));
+                }
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(15).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition),3000,null);
@@ -105,6 +113,34 @@ public class ComposeMsgFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_dropdown_item_1line ,contacts);
         whoNum.setAdapter(adapter);
         whoNum.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
+        final EditText noteTextView = getView().findViewById(R.id.noteText);
+        final EditText whoToTextView = getView().findViewById(R.id.whoNumTxt);
+
+        Button PostBtn = getView().findViewById(R.id.postBtn);
+        PostBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                noteText = noteTextView.getText().toString();
+                whoToText = whoToTextView.getText().toString();
+
+                Bundle mainBundle = new Bundle();
+
+                Bundle noteBundle = new Bundle();
+                noteBundle.putSerializable("noteKey", noteText);
+
+                Bundle whoBundle = new Bundle();
+                whoBundle.putSerializable("whoBundle", whoToText);
+
+                mainBundle.putBundle("noteBundle", noteBundle);
+                mainBundle.putBundle("locBundle", locBundle);
+                mainBundle.putBundle("receiverBundle", whoBundle);
+
+                Fragment fragment = new GmapFragment();
+                fragment.setArguments(mainBundle);
+                replaceFragment(fragment);
+            }
+        });
     }
 
     public void replaceFragment(Fragment someFragment) {
