@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -71,7 +72,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
-    private int numOfUnreadNotes;
+    private int numOfUnreadNotes =5;
 
     //Place marker on touch
     private MarkerOptions marker = null;
@@ -197,6 +198,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 marker.position(latLng);
                 marker.title("PostIT here!");
                 mMap.clear();
+
                 if (loc != null){
                     LatLng myNoteLatLng = new LatLng(loc[1],loc[0]);
                     myNoteMarker = new MarkerOptions();
@@ -207,6 +209,12 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                     myNoteMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
                     mMap.addMarker(myNoteMarker);
                 }
+                String[] contacts = getResources().getStringArray(R.array.msgNamesArray);
+                for(int x = 0; x < numOfUnreadNotes; x++) {
+                    mailMarker = mMap.addMarker(new MarkerOptions()
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                            .position(messageCoord[x]).title(contacts[x]).snippet("Unread Note"));
+                }
                 mMap.addMarker(marker);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 fab.startAnimation(btnAnim);
@@ -216,20 +224,20 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void leaveRandomNotes() {
-        for(int x=0;x<5;x++){
-            double lat = .0200 * r.nextDouble() + 34.6634;
-            double lon = .0200 * r.nextDouble() + 82.8174;
-// TODO           double lat = 0.0200 * r.nextDouble() + mLastKnownLocation.getLatitude();
-//            double lon = .0200 * r.nextDouble() + mLastKnownLocation.getLongitude();
-            messageCoord[x] = new LatLng(lat, -lon);
+        for(int x=0;x < numOfUnreadNotes;x++){
+//            double lat = .0200 * r.nextDouble() + 34.6634;
+//            double lon = .0200 * r.nextDouble() + 82.8174;
+            double lat = 0.0200 * r.nextDouble() + mLastKnownLocation.getLatitude();
+            double lon = .0200 * r.nextDouble() + mLastKnownLocation.getLongitude();
+            messageCoord[x] = new LatLng(lat, lon);
         }
 
+        String[] contacts = getResources().getStringArray(R.array.msgNamesArray);
         for(int x = 0; x < numOfUnreadNotes; x++) {
             mailMarker = mMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                    .position(messageCoord[x]).title("Sender of Msg"));
+                    .position(messageCoord[x]).title(contacts[x]).snippet("Unread Note"));
         }
-        Toast.makeText(getActivity(), "Tap to place a Note", Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -249,6 +257,8 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                            //LEAVE RANDOM UNREAD NOTES
+                            leaveRandomNotes();
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
@@ -256,8 +266,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                                     .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
                         }
-//LEAVE RANDOM UNREAD NOTES
-                        leaveRandomNotes();
                     }
                 });
             }
