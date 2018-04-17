@@ -22,5 +22,7 @@
     <string name="randomDate">07/3/18</string>
     <string name="msgViewReply">Reply directly by leaving a Note at your current location</string>
     <string name="pfailed">Permission Failed</string>
+    <string name="sampleNote">This is an example of a Note left for you at your current location, if you look you will see other notes left for you around town. You can place notes for contacts anywhere you want!</string>
+    <string name="sampleText">You found a Note at your current location.   You can find other notes in the area around you.   And you can leave notes for Contacts anywhere you\'d like!</string>
 
 </resources>
