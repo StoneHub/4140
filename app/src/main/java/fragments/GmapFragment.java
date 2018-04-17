@@ -263,6 +263,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         mMap.addMarker(tutorialMarker);
 
         //Leave a note at current location to read instructions
+        //fixing commit
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker arg0) {
@@ -290,6 +291,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 return info;
             }
         });
+
     }
 
     /**
