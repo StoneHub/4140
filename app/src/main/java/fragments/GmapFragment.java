@@ -1,13 +1,8 @@
 package fragments;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,15 +11,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cpsc41400.a4140app.R;
@@ -43,10 +34,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 
 import java.util.Random;
-import java.util.zip.Inflater;
 
 /**
  * Created by monro on 3/20/2018.
@@ -77,7 +66,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
-    private int numOfUnreadNotes = 5;
+    private int numOfUnreadNotes = 2;
 
     //Place marker on touch
     private MarkerOptions marker = null;
@@ -93,38 +82,28 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     private static View view;
     private String note;
     private String receiver;
-    private double[] loc;
-
-    MarkerOptions tutorialMarker;
+    private double[] loc = new double[2];
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        if (view != null) {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            if (parent != null)
-                parent.removeView(view);
-        }
-        try {
-            view = inflater.inflate(R.layout.fragment_gmap, container, false);
-        } catch (android.view.InflateException e) {
-        }
+        view = inflater.inflate(R.layout.fragment_gmap, container, false);
 
         Bundle bundle = getArguments();
-        if (bundle != null) {
-
-            if (bundle.containsKey("locBundle")) {
+        if (bundle !=null){
+            if (bundle.containsKey("locBundle")){
                 loc = bundle.getBundle("locBundle").getDoubleArray("locKey");
             }
-            if (bundle.containsKey("noteBundle")) {
-                note = bundle.getBundle("noteBundle").getString("noteKey");
-            }
-            if (bundle.containsKey("receiverBundle")) {
+           if (bundle.containsKey("noteBundle")){
+               note = bundle.getBundle("noteBundle").getString("noteKey");
+           }
+           if (bundle.containsKey("receiverBundle")){
                 receiver = bundle.getBundle("receiverBundle").getString("whoBundle");
-            }
+           }
         }
         return view;
     }
+
 
 
     @Override
@@ -141,6 +120,10 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
         MapFragment fragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         fragment.getMapAsync(this);
+        if(savedInstanceState!=null){
+            loc = savedInstanceState.getDoubleArray(KEY_LOCATION);
+            Toast.makeText(getActivity(),"Location Restored",Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -150,7 +133,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     public void onSaveInstanceState(Bundle outState) {
         if (mMap != null) {
             outState.putParcelable(KEY_CAMERA_POSITION, mMap.getCameraPosition());
-            outState.putParcelable(KEY_LOCATION, mLastKnownLocation);
+            outState.putSerializable(KEY_LOCATION, loc);
             super.onSaveInstanceState(outState);
         }
     }
@@ -172,7 +155,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         }
 
         final FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        final Animation btnAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.bounce);
+        final Animation btnAnim = AnimationUtils.loadAnimation(getActivity(),R.anim.bounce);
         MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
         btnAnim.setInterpolator(interpolator);
         fab.startAnimation(btnAnim);
@@ -186,8 +169,8 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         });
 
         //load arguments of a placed note
-        if (loc != null) {
-            LatLng myNoteLatLng = new LatLng(loc[1], loc[0]);
+        if (loc != null){
+            LatLng myNoteLatLng = new LatLng(loc[1],loc[0]);
             myNoteMarker = new MarkerOptions();
             myNoteMarker.position(myNoteLatLng);
 
@@ -195,7 +178,6 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
             myNoteMarker.snippet(note);
             myNoteMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
             mMap.addMarker(myNoteMarker);
-
         }
 
         //Place marker
@@ -209,21 +191,19 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 marker.title("PostIT here!");
                 mMap.clear();
 
-                if (loc != null) {
-
-                    LatLng myNoteLatLng = new LatLng(loc[1], loc[0]);
+                //rebuild placed notes real fast
+                if (loc != null){
+                    LatLng myNoteLatLng = new LatLng(loc[1],loc[0]);
                     myNoteMarker = new MarkerOptions();
                     myNoteMarker.position(myNoteLatLng);
 
                     myNoteMarker.title("Your Note to: " + receiver);
                     myNoteMarker.snippet(note);
                     myNoteMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-                    mMap.clear();
-
                     mMap.addMarker(myNoteMarker);
                 }
                 String[] contacts = getResources().getStringArray(R.array.msgNamesArray);
-                for (int x = 0; x < numOfUnreadNotes; x++) {
+                for(int x = 0; x < numOfUnreadNotes; x++) {
                     mailMarker = mMap.addMarker(new MarkerOptions()
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                             .position(messageCoord[x]).title(contacts[x]).snippet("Unread Note"));
@@ -233,63 +213,21 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 fab.startAnimation(btnAnim);
             }
         });
-
     }
 
     private void leaveRandomNotes() {
-        for (int x = 0; x < numOfUnreadNotes; x++) {
+        for(int x=0;x < numOfUnreadNotes;x++){
             double lat = 0.0200 * r.nextDouble() + mLastKnownLocation.getLatitude();
             double lon = .0200 * r.nextDouble() + mLastKnownLocation.getLongitude();
             messageCoord[x] = new LatLng(lat, lon);
         }
 
         String[] contacts = getResources().getStringArray(R.array.msgNamesArray);
-        for (int x = 0; x < numOfUnreadNotes; x++) {
+        for(int x = 0; x < numOfUnreadNotes; x++) {
             mailMarker = mMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                    .position(messageCoord[x])
-                    .title(contacts[x])
-                    .snippet("Unread Note"));
+                    .position(messageCoord[x]).title(contacts[x]).snippet("Unread Note"));
         }
-
-        mailMarker = mMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
-                .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
-                .title("Tap me again!")
-        );
-
-        LatLng mLatLng = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
-        tutorialMarker = new MarkerOptions().position(mLatLng).title("Post-iT Team").snippet(getString(R.string.sampleText)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
-        mMap.addMarker(tutorialMarker);
-
-        //Leave a note at current location to read instructions
-        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-            @Override
-            public View getInfoWindow(Marker arg0) {
-                return null;
-            }
-            @Override
-            public View getInfoContents(Marker marker) {
-
-                LinearLayout info = new LinearLayout(getActivity());
-                info.setOrientation(LinearLayout.VERTICAL);
-
-                TextView title = new TextView(getActivity());
-                title.setTextColor(Color.BLACK);
-                title.setGravity(Gravity.CENTER);
-                title.setTypeface(null, Typeface.BOLD);
-                title.setText(marker.getTitle());
-
-                TextView snippet = new TextView(getActivity());
-                snippet.setTextColor(Color.GRAY);
-                snippet.setText(marker.getSnippet());
-
-                info.addView(title);
-                info.addView(snippet);
-
-                return info;
-            }
-        });
     }
 
     /**
@@ -321,7 +259,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                     }
                 });
             }
-        } catch (SecurityException e) {
+        } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
         }
     }
@@ -337,35 +275,37 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
          */
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
-        if (ContextCompat.checkSelfPermission(getActivity(), FINE_LOCATION)
+        if (ContextCompat.checkSelfPermission(getActivity(),FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            if (ContextCompat.checkSelfPermission(getActivity(), COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(getActivity(),COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                 mLocationPermissionGranted = true;
-            } else {
-                ActivityCompat.requestPermissions(getActivity(), permissions, LOCATION_PERMISSION_REQUEST_CODE);
-            }
         } else {
             ActivityCompat.requestPermissions(getActivity(), permissions, LOCATION_PERMISSION_REQUEST_CODE);
+            }
+        } else {
+            ActivityCompat.requestPermissions(getActivity(),permissions,LOCATION_PERMISSION_REQUEST_CODE);
         }
     }
 
-    public void composeNoteFragmentSwitcher() {
+    public void composeNoteFragmentSwitcher(){
         Bundle bundleBundle = new Bundle();
         //check for marker, if no marker is set use current location
         if (!markerExist) {
-            double[] loc = {mLastKnownLocation.getLongitude(), mLastKnownLocation.getLatitude()};
+            loc[0] = mLastKnownLocation.getLatitude();
+            loc[1] = mLastKnownLocation.getLongitude();
             Bundle bundle = new Bundle();
             bundle.putSerializable("locKey", loc);
-            bundleBundle.putBundle("bundlelocKey", bundle);
+            bundleBundle.putBundle("bundlelocKey",bundle);
 
             Fragment fragment = new ComposeMsgFragment();
             fragment.setArguments(bundleBundle);
             replaceFragment(fragment);
-        } else { //use marker location
+        }
+        else { //use marker location
             double[] loc = {marker.getPosition().longitude, marker.getPosition().latitude};
             Bundle bundle = new Bundle();
             bundle.putSerializable("locKey", loc);
-            bundleBundle.putBundle("bundlelocKey", bundle);
+            bundleBundle.putBundle("bundlelocKey",bundle);
 
             Fragment fragment = new ComposeMsgFragment();
             fragment.setArguments(bundleBundle);
@@ -379,6 +319,4 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
 }
-
