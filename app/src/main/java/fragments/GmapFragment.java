@@ -72,7 +72,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
-    private int numOfUnreadNotes =5;
+    private int numOfUnreadNotes = 2;
 
     //Place marker on touch
     private MarkerOptions marker = null;
@@ -88,19 +88,12 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     private static View view;
     private String note;
     private String receiver;
-    private double[] loc;
+    private double[] loc = new double[2];
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-           if (view != null) {
-            ViewGroup parent = (ViewGroup) view.getParent();
-            if (parent != null)
-                parent.removeView(view);
-        }
-        try {
-            view = inflater.inflate(R.layout.fragment_gmap, container, false);
-        } catch (android.view.InflateException e) {}
+        view = inflater.inflate(R.layout.fragment_gmap, container, false);
 
         Bundle bundle = getArguments();
         if (bundle !=null){
@@ -118,6 +111,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     }
 
 
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -132,6 +126,10 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
         MapFragment fragment = (MapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         fragment.getMapAsync(this);
+        if(savedInstanceState!=null){
+            loc = savedInstanceState.getDoubleArray(KEY_LOCATION);
+            Toast.makeText(getActivity(),"Location Restored",Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -141,7 +139,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     public void onSaveInstanceState(Bundle outState) {
         if (mMap != null) {
             outState.putParcelable(KEY_CAMERA_POSITION, mMap.getCameraPosition());
-            outState.putParcelable(KEY_LOCATION, mLastKnownLocation);
+            outState.putSerializable(KEY_LOCATION, loc);
             super.onSaveInstanceState(outState);
         }
     }
@@ -199,6 +197,7 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 marker.title("PostIT here!");
                 mMap.clear();
 
+                //rebuild placed notes real fast
                 if (loc != null){
                     LatLng myNoteLatLng = new LatLng(loc[1],loc[0]);
                     myNoteMarker = new MarkerOptions();
@@ -220,13 +219,10 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
                 fab.startAnimation(btnAnim);
             }
         });
-
     }
 
     private void leaveRandomNotes() {
         for(int x=0;x < numOfUnreadNotes;x++){
-//            double lat = .0200 * r.nextDouble() + 34.6634;
-//            double lon = .0200 * r.nextDouble() + 82.8174;
             double lat = 0.0200 * r.nextDouble() + mLastKnownLocation.getLatitude();
             double lon = .0200 * r.nextDouble() + mLastKnownLocation.getLongitude();
             messageCoord[x] = new LatLng(lat, lon);
@@ -301,7 +297,8 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
         Bundle bundleBundle = new Bundle();
         //check for marker, if no marker is set use current location
         if (!markerExist) {
-            double[] loc ={mLastKnownLocation.getLongitude(),mLastKnownLocation.getLatitude()};
+            loc[0] = mLastKnownLocation.getLatitude();
+            loc[1] = mLastKnownLocation.getLongitude();
             Bundle bundle = new Bundle();
             bundle.putSerializable("locKey", loc);
             bundleBundle.putBundle("bundlelocKey",bundle);
