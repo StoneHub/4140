@@ -122,7 +122,15 @@ public class ComposeMsgFragment extends Fragment {
         PostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (noteTextView.getText().length() == 0) {
+                    Toast.makeText(getActivity(),"No Note text! You must leave something!", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 noteText = noteTextView.getText().toString();
+                if (whoToTextView.getText().length() == 0) {
+                    Toast.makeText(getActivity(),"No Contact selected! You must leave the note for someone!", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 whoToText = whoToTextView.getText().toString();
 
                 Bundle mainBundle = new Bundle();
