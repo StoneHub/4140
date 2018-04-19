@@ -1,13 +1,10 @@
 package fragments;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,10 +39,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 
 import java.util.Random;
-import java.util.zip.Inflater;
 
 /**
  * Created by monro on 3/20/2018.
@@ -77,12 +71,13 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
 
-    private int numOfUnreadNotes = 5;
+    private int numOfUnreadNotes = 3;
+    private int numOfReadNotes = 2;
 
     //Place marker on touch
     private MarkerOptions marker = null;
     private MarkerOptions myNoteMarker;
-    private Marker mailMarker;
+    private Marker unreadMailMarker;
     Random r = new Random();
     LatLng[] messageCoord = new LatLng[10];
 
@@ -222,12 +217,13 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
                     mMap.addMarker(myNoteMarker);
                 }
-                String[] contacts = getResources().getStringArray(R.array.msgNamesArray);
-                for (int x = 0; x < numOfUnreadNotes; x++) {
-                    mailMarker = mMap.addMarker(new MarkerOptions()
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                            .position(messageCoord[x]).title(contacts[x]).snippet("Unread Note"));
-                }
+//                String[] contacts = getResources().getStringArray(R.array.msgNamesArray);
+//                for (int x = 0; x < numOfUnreadNotes; x++) {
+//                    unreadMailMarker = mMap.addMarker(new MarkerOptions()
+//                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+//                            .position(messageCoord[x]).title(contacts[x]).snippet("Unread Note"));
+//                }
+                leaveRandomNotes();
                 mMap.addMarker(marker);
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 fab.startAnimation(btnAnim);
@@ -237,26 +233,22 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void leaveRandomNotes() {
-        for (int x = 0; x < numOfUnreadNotes; x++) {
-            double lat = 0.0200 * r.nextDouble() + mLastKnownLocation.getLatitude();
-            double lon = .0200 * r.nextDouble() + mLastKnownLocation.getLongitude();
-            messageCoord[x] = new LatLng(lat, lon);
-        }
 
         String[] contacts = getResources().getStringArray(R.array.msgNamesArray);
-        for (int x = 0; x < numOfUnreadNotes; x++) {
-            mailMarker = mMap.addMarker(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                    .position(messageCoord[x])
-                    .title(contacts[x])
-                    .snippet("Unread Note"));
-        }
+        String[] notes = getResources().getStringArray(R.array.msg_contents_array);
 
-        mailMarker = mMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))
-                .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
-                .title("Tap me again!")
-        );
+
+        unreadMailMarker = mMap.addMarker(new MarkerOptions()
+                                           .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                                            .position(new LatLng(mLastKnownLocation.getLatitude() + 0.02 , mLastKnownLocation.getLongitude() - 0.02))
+                                            .title(contacts[0])
+                                            .snippet("Unread Note"));
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                .position(new LatLng(mLastKnownLocation.getLatitude() - 0.02 , mLastKnownLocation.getLongitude() - 0.02))
+                .title(contacts[5])
+                .snippet(notes[5]));
+
 
         LatLng mLatLng = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
         tutorialMarker = new MarkerOptions().position(mLatLng).title("Post-iT Team").snippet(getString(R.string.sampleText)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
