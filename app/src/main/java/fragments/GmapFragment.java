@@ -240,12 +240,12 @@ public class GmapFragment extends Fragment implements OnMapReadyCallback {
 
         unreadMailMarker = mMap.addMarker(new MarkerOptions()
                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                                            .position(new LatLng(mLastKnownLocation.getLatitude() + 0.02 , mLastKnownLocation.getLongitude() - 0.02))
+                                            .position(new LatLng(mLastKnownLocation.getLatitude() + 0.02 , mLastKnownLocation.getLongitude() + 0.02))
                                             .title(contacts[0])
                                             .snippet("Unread Note"));
         mMap.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
-                .position(new LatLng(mLastKnownLocation.getLatitude() - 0.02 , mLastKnownLocation.getLongitude() - 0.02))
+                .position(new LatLng(mLastKnownLocation.getLatitude() - 0.02 , mLastKnownLocation.getLongitude() + 0.02))
                 .title(contacts[5])
                 .snippet(notes[5]));
 
